@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fund Your Dreams | Opportunity Details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f1e6;
+      --paper: #fffdf8;
+      --ink: #111b2d;
+      --ink-soft: #25314a;
+      --muted: #5a6780;
+      --line: #d7cdb8;
+      --sun: #ff7a3d;
+      --teal: #0d7f75;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, #fff4d9 0%, transparent 42%),
+        radial-gradient(circle at 90% 7%, #e6f2ff 0%, transparent 34%),
+        var(--bg);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    nav {
+      border-bottom: 1px solid #e4dbc8;
+      background: rgba(255, 253, 248, 0.94);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 70px;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      letter-spacing: -0.02em;
+      display: inline-flex;
+      gap: 0.25rem;
+    }
+
+    .brand span { color: var(--sun); }
+
+    .back-link {
+      font-weight: 700;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid #d6ccb9;
+      border-radius: 999px;
+      padding: 0.42rem 0.78rem;
+      background: #fff;
+    }
+
+    .page {
+      padding: 1.3rem 0 2.8rem;
+    }
+
+    .header-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 12px 26px rgba(20, 29, 52, 0.09);
+    }
+
+    .header-image-wrap {
+      width: 100%;
+      background: #eef2fa;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      max-height: none;
+      overflow: hidden;
+    }
+
+    .header-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .header-content {
+      padding: clamp(1rem, 3vw, 1.5rem);
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .type-badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 0.32rem 0.64rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #7e4100;
+      background: #ffe8dc;
+    }
+
+    .type-fellowship { color: #005c54; background: #dff4f1; }
+    .type-scholarship { color: #5f4a00; background: #fff2c8; }
+
+    .header-content h1 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.65rem, 3.8vw, 2.4rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 24ch;
+    }
+
+    .host {
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .meta-chip {
+      border: 1px solid #d9ceb9;
+      border-radius: 999px;
+      background: #fff;
+      padding: 0.34rem 0.64rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #30405f;
+    }
+
+    .apply-btn {
+      margin-top: 0.35rem;
+      width: fit-content;
+      border: none;
+      border-radius: 999px;
+      background: var(--teal);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.58rem 0.92rem;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .content-grid {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: 1fr;
+    }
+
+    .section-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper);
+      padding: 1rem;
+    }
+
+    .section-card h2 {
+      font-family: "Fraunces", serif;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.42rem;
+    }
+
+    .section-card p {
+      color: #344260;
+      white-space: pre-line;
+    }
+
+    .section-body {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .section-body p {
+      margin: 0;
+    }
+
+    .section-card ul {
+      margin-left: 1.2rem;
+      display: grid;
+      gap: 0.35rem;
+      color: #344260;
+    }
+
+    .empty-state {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper);
+      padding: 1rem;
+      color: #4a5876;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      gap: 0.35rem;
+      color: #4b5977;
+      font-weight: 700;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .image-placeholder small {
+      font-size: 0.8rem;
+      color: #6a7894;
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      .header-image-wrap {
+        aspect-ratio: 4 / 3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="scholarship-website.html" class="brand">Fund Your <span>Dreams</span></a>
+      <a class="back-link" href="scholarship-website.html">Back to Opportunities</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="container" id="detailsRoot"></div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "fyd_posts_v2";
+    const LEGACY_STORAGE_KEY = "fyd_posts_v1";
+    const API_ENABLED = window.location.protocol !== "file:";
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    async function getPostById(id) {
+      if (API_ENABLED && id) {
+        try {
+          const response = await fetch(`/api/posts/${encodeURIComponent(id)}`, {
+            credentials: "same-origin"
+          });
+          const data = await response.json();
+          if (response.ok) return data.post || null;
+        } catch (_) {
+          // Fallback to browser storage if the server is unavailable.
+        }
+      }
+
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return null;
+        return parsed.find((post) => String(post.id) === String(id)) || null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function toList(text) {
+      if (!text) return [];
+      return text
+        .split(/\r?\n/)
+        .map((item) => item.replace(/^\s*[\u2022\-*]+\s*/, "").replace(/^\s*\d+[\).\s-]+/, "").trim())
+        .filter(Boolean);
+    }
+
+    function renderParagraphs(text) {
+      const value = (text || "").trim();
+      if (!value) return "";
+      const paragraphs = value.split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
+      if (paragraphs.length === 0) return "";
+      return paragraphs
+        .map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br />")}</p>`)
+        .join("");
+    }
+
+    function renderTextSection(title, text) {
+      const value = (text || "").trim();
+      if (!value) return "";
+      return `
+        <section class="section-card">
+          <h2>${escapeHtml(title)}</h2>
+          <div class="section-body">${renderParagraphs(value)}</div>
+        </section>
+      `;
+    }
+
+    function renderListSection(title, text) {
+      const items = toList(text);
+      if (!items.length) return "";
+      return `
+        <section class="section-card">
+          <h2>${escapeHtml(title)}</h2>
+          <ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </section>
+      `;
+    }
+
+    function renderDetails(post) {
+      const root = document.getElementById("detailsRoot");
+      if (!post) {
+        root.innerHTML = `
+          <section class="empty-state">
+            <h2>Opportunity not found</h2>
+            <p>This post may have been removed or not available on this browser yet.</p>
+          </section>
+        `;
+        return;
+      }
+
+      const labelMap = {
+        internship: "Internship",
+        fellowship: "Fellowship",
+        scholarship: "Scholarship"
+      };
+      const badgeClass = post.type === "fellowship" ? "type-fellowship" : (post.type === "scholarship" ? "type-scholarship" : "");
+      const title = (post.title || "").trim() || "Untitled opportunity";
+      const org = (post.org || "").trim() || "Host not specified";
+      const desc = (post.desc || post.overview || "").trim() || "Details will be updated soon.";
+      const funding = (post.funding || "").trim() || "Not specified";
+      const deadline = (post.deadline || "").trim() || "Not specified";
+      const image = (post.image || "").trim();
+      const wholeSummary = (post.overview || "").trim() || desc;
+      const applyLink = (post.applyLink || post.link || "").trim();
+      const hasApplyLink = /^https?:\/\//i.test(applyLink);
+
+      root.innerHTML = `
+        <article class="header-card">
+          <div class="header-image-wrap">
+            ${image
+              ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)} official image" fetchpriority="high" />`
+              : `<div class="image-placeholder">Official image pending<small>Upload official photo from Owner Console</small></div>`}
+          </div>
+          <div class="header-content">
+            <span class="type-badge ${badgeClass}">${escapeHtml(labelMap[post.type] || "Opportunity")}</span>
+            <h1>${escapeHtml(title)}</h1>
+            <p class="host">${escapeHtml(org)}</p>
+            <div class="meta">
+              <span class="meta-chip">Funding: ${escapeHtml(funding)}</span>
+              <span class="meta-chip">Deadline: ${escapeHtml(deadline)}</span>
+            </div>
+          </div>
+        </article>
+
+        <div class="content-grid">
+          ${renderTextSection("Whole Summary", wholeSummary)}
+          ${renderTextSection("Eligibility Criteria", post.eligibility)}
+          ${renderTextSection("Benefits and Funding Breakdown", post.benefits)}
+          ${renderListSection("Required Documents", post.documents)}
+          ${renderListSection("Application Process", post.steps)}
+          ${renderTextSection("Important Notes", post.notes)}
+          <section class="section-card">
+            <h2>Official Apply Link</h2>
+            ${hasApplyLink
+              ? `<a class="apply-btn" href="${escapeHtml(applyLink)}" target="_blank" rel="noopener noreferrer" data-apply-id="${escapeHtml(post.id)}">Apply on Official Website</a>`
+              : `<p>Official apply link will be updated soon.</p>`}
+          </section>
+        </div>
+      `;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get("id");
+    getPostById(postId).then((post) => {
+      renderDetails(post);
+      if (post && API_ENABLED) {
+        fetch(`/api/posts/${encodeURIComponent(post.id)}/metrics`, {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ metric: "views" })
+        }).catch(() => {});
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const applyLink = event.target.closest("[data-apply-id]");
+      if (!applyLink || !API_ENABLED) return;
+      fetch(`/api/posts/${encodeURIComponent(applyLink.getAttribute("data-apply-id"))}/metrics`, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ metric: "clicks" })
+      }).catch(() => {});
+    });
+  </script>
+</body>
+</html>
