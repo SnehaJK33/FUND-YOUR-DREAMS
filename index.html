@@ -568,7 +568,6 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#posts">Explore listings</a>
-            <a class="btn btn-secondary" href="#admin">Open admin</a>
           </div>
         </div>
       </section>
@@ -592,148 +591,17 @@
         </div>
       </section>
 
-      <section id="adminSection" class="admin-shell">
-        <div class="container admin-grid">
-          <div class="panel admin-panel">
-            <h2>Admin</h2>
-            <div id="authBox" class="auth-box">
-              <form id="loginForm" class="editor-box">
-                <div class="field">
-                  <label for="emailInput">Email</label>
-                  <input id="emailInput" name="email" type="email" placeholder="you@example.com" required />
-                </div>
-                <div class="field">
-                  <label for="passwordInput">Password</label>
-                  <input id="passwordInput" name="password" type="password" placeholder="Password" required />
-                </div>
-                <button class="btn btn-primary" type="submit">Log in</button>
-              </form>
-            </div>
-
-            <div id="adminLoggedIn" style="display:none;">
-              <div class="field">
-                <label>Signed in as</label>
-                <div id="adminEmail" class="muted-text"></div>
-              </div>
-              <button id="logoutBtn" class="btn btn-secondary" type="button">Log out</button>
-            </div>
-          </div>
-
-          <div class="panel manage-panel">
-            <h2>Post editor</h2>
-            <div id="adminNotice" class="notice"></div>
-
-            <form id="postForm" class="editor-box">
-              <div class="field">
-                <label for="typeInput">Type</label>
-                <select id="typeInput" required>
-                  <option value="scholarship">Scholarship</option>
-                  <option value="internship">Internship</option>
-                  <option value="fellowship">Fellowship</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="titleInput">Title</label>
-                <input id="titleInput" type="text" placeholder="Example: Fulbright Foreign Student Program" required />
-              </div>
-
-              <div class="field">
-                <label for="hostInput">Host / organization</label>
-                <input id="hostInput" type="text" placeholder="Example: Fulbright Commission" required />
-              </div>
-
-              <div class="field">
-                <label for="countryInput">Country</label>
-                <input id="countryInput" type="text" placeholder="Example: United States" required />
-              </div>
-
-              <div class="field">
-                <label for="fundingInput">Funding</label>
-                <input id="fundingInput" type="text" placeholder="Full tuition + stipend + travel" required />
-              </div>
-
-              <div class="field">
-                <label for="deadlineInput">Deadline</label>
-                <input id="deadlineInput" type="date" required />
-              </div>
-
-              <div class="field">
-                <label for="summaryInput">Short summary</label>
-                <textarea id="summaryInput" placeholder="One short paragraph about the opportunity." required></textarea>
-              </div>
-
-              <div class="field">
-                <label for="detailsInput">Full details</label>
-                <textarea id="detailsInput" placeholder="Add the full description, eligibility, benefits, and notes." required></textarea>
-              </div>
-
-              <div class="field">
-                <label for="linkInput">Official link</label>
-                <input id="linkInput" type="url" placeholder="https://example.com" required />
-              </div>
-
-              <div class="field">
-                <label for="statusInput">Status</label>
-                <select id="statusInput">
-                  <option value="published">Published</option>
-                  <option value="draft">Draft</option>
-                </select>
-              </div>
-
-              <div class="status-row">
-                <button id="savePostBtn" class="btn btn-primary" type="submit">Save post</button>
-                <button id="resetPostBtn" class="btn btn-secondary" type="button">New post</button>
-              </div>
-            </form>
-
-            <div>
-              <h3>Existing posts</h3>
-              <div id="adminPostsList" class="manage-list"></div>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
     <script>
       const state = {
         posts: [],
         selectedId: null,
-        filter: "all",
-        user: null,
-        editingId: null,
-        adminPosts: []
+        filter: "all"
       };
 
       const postsList = document.getElementById("postsList");
       const detailsPanel = document.getElementById("detailsPanel");
-      const adminSection = document.getElementById("adminSection");
-      const adminNotice = document.getElementById("adminNotice");
-      const loginForm = document.getElementById("loginForm");
-      const postForm = document.getElementById("postForm");
-      const adminEmail = document.getElementById("adminEmail");
-      const authBox = document.getElementById("authBox");
-      const adminLoggedIn = document.getElementById("adminLoggedIn");
-      const adminPostsList = document.getElementById("adminPostsList");
-
-      async function apiRequest(path, options = {}) {
-        const response = await fetch(path, {
-          headers: {
-            "Content-Type": "application/json",
-            ...(options.headers || {})
-          },
-          ...options,
-          body: options.body ? JSON.stringify(options.body) : undefined
-        });
-
-        const payload = await response.json().catch(() => ({}));
-        if (!response.ok) {
-          throw new Error(payload.error || "Request failed");
-        }
-
-        return payload;
-      }
 
       function escapeHtml(value) {
         return String(value || "")
@@ -742,15 +610,6 @@
           .replace(/>/g, "&gt;")
           .replace(/\"/g, "&quot;")
           .replace(/'/g, "&#039;");
-      }
-
-      function showNotice(message, type = "success") {
-        adminNotice.textContent = message;
-        adminNotice.className = `notice ${type} show`;
-      }
-
-      function hideNotice() {
-        adminNotice.className = "notice";
       }
 
       function formatDate(dateValue) {
@@ -763,11 +622,6 @@
         const date = new Date(dateValue);
         if (Number.isNaN(date.getTime())) return dateValue;
         return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-      }
-
-      function syncAdminVisibility() {
-        const isAdmin = window.location.hash === "#admin";
-        adminSection.classList.toggle("visible", isAdmin);
       }
 
       function renderPosts() {
@@ -853,99 +707,14 @@
         detailsPanel.innerHTML = detailHtml;
       }
 
-      function resetForm() {
-        state.editingId = null;
-        postForm.reset();
-        document.getElementById("typeInput").value = "scholarship";
-        document.getElementById("statusInput").value = "published";
-      }
-
-      function populateForm(post) {
-        state.editingId = post.id;
-        document.getElementById("typeInput").value = post.type || "scholarship";
-        document.getElementById("titleInput").value = post.title || "";
-        document.getElementById("hostInput").value = post.host || post.org || "";
-        document.getElementById("countryInput").value = post.country || "";
-        document.getElementById("fundingInput").value = post.funding || "";
-        document.getElementById("deadlineInput").value = post.deadline || "";
-        document.getElementById("summaryInput").value = post.summary || post.desc || "";
-        document.getElementById("detailsInput").value = post.details || post.overview || "";
-        document.getElementById("linkInput").value = post.link || post.applyLink || "";
-        document.getElementById("statusInput").value = post.status || "published";
-      }
-
-      function renderAdminPosts() {
-        if (!state.user) {
-          adminPostsList.innerHTML = "";
-          return;
+      async function loadPosts() {
+        const response = await fetch("data/posts.json", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Unable to load posts");
         }
 
-        const items = state.adminPosts.filter(Boolean);
-
-        if (!items.length) {
-          adminPostsList.innerHTML = '<div class="muted-text">No posts yet.</div>';
-          return;
-        }
-
-        adminPostsList.innerHTML = items
-          .map(
-            (post) => `
-              <div class="manage-item">
-                <div>
-                  <strong>${escapeHtml(post.title)}</strong>
-                  <span class="muted-text">${escapeHtml(post.status || "published")} • ${escapeHtml(post.type || "scholarship")}</span>
-                </div>
-                <div class="manage-actions">
-                  <button class="mini-btn edit-post" data-id="${post.id}" type="button">Edit</button>
-                  <button class="mini-btn danger delete-post" data-id="${post.id}" type="button">Delete</button>
-                </div>
-              </div>
-            `
-          )
-          .join("");
-
-        adminPostsList.querySelectorAll(".edit-post").forEach((button) => {
-          button.addEventListener("click", () => {
-            const matched = state.adminPosts.find((item) => item.id === button.dataset.id);
-            if (matched) populateForm(matched);
-          });
-        });
-
-        adminPostsList.querySelectorAll(".delete-post").forEach((button) => {
-          button.addEventListener("click", async () => {
-            const id = button.dataset.id;
-            try {
-              await apiRequest(`/admin/posts/${id}`, { method: "DELETE" });
-              showNotice("Post deleted.", "success");
-              await loadAdminPosts();
-              await loadPublicPosts();
-            } catch (error) {
-              showNotice(error.message || "Delete failed.", "error");
-            }
-          });
-        });
-      }
-
-      function getFormPayload() {
-        return {
-          type: document.getElementById("typeInput").value,
-          title: document.getElementById("titleInput").value.trim(),
-          host: document.getElementById("hostInput").value.trim(),
-          country: document.getElementById("countryInput").value.trim(),
-          funding: document.getElementById("fundingInput").value.trim(),
-          deadline: document.getElementById("deadlineInput").value,
-          summary: document.getElementById("summaryInput").value.trim(),
-          details: document.getElementById("detailsInput").value.trim(),
-          link: document.getElementById("linkInput").value.trim(),
-          status: document.getElementById("statusInput").value,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-      }
-
-      async function loadPublicPosts() {
-        const data = await apiRequest("/api/posts");
-        state.posts = data.posts || [];
+        const data = await response.json();
+        state.posts = (data || []).filter((post) => post.status === "published");
 
         if (!state.selectedId && state.posts.length) {
           state.selectedId = state.posts[0].id;
@@ -959,82 +728,6 @@
         renderDetails();
       }
 
-      async function loadAdminPosts() {
-        const data = await apiRequest("/api/admin/posts");
-        state.adminPosts = data.posts || [];
-        renderAdminPosts();
-      }
-
-      async function checkSession() {
-        try {
-          const data = await apiRequest("/api/session");
-          state.user = data.authenticated ? { email: document.getElementById("emailInput").value.trim() || "admin" } : null;
-        } catch (error) {
-          state.user = null;
-        }
-
-        if (state.user) {
-          authBox.style.display = "none";
-          adminLoggedIn.style.display = "block";
-          adminEmail.textContent = document.getElementById("emailInput").value.trim() || "Signed in";
-          await loadAdminPosts();
-        } else {
-          authBox.style.display = "block";
-          adminLoggedIn.style.display = "none";
-          adminEmail.textContent = "";
-          state.adminPosts = [];
-          renderAdminPosts();
-        }
-      }
-
-      async function savePost(event) {
-        event.preventDefault();
-
-        if (!state.user) {
-          showNotice("Log in to publish or save posts.", "error");
-          return;
-        }
-
-        const payload = getFormPayload();
-
-        if (
-          !payload.title ||
-          !payload.host ||
-          !payload.country ||
-          !payload.funding ||
-          !payload.deadline ||
-          !payload.summary ||
-          !payload.details ||
-          !payload.link ||
-          !/^https?:\/\//i.test(payload.link)
-        ) {
-          showNotice("Please complete every field and enter a valid official URL.", "error");
-          return;
-        }
-
-        try {
-          if (state.editingId) {
-            await apiRequest(`/api/admin/posts/${state.editingId}`, {
-              method: "PUT",
-              body: { ...payload, updatedAt: new Date().toISOString() }
-            });
-            showNotice("Post updated.", "success");
-          } else {
-            await apiRequest("/api/admin/posts", {
-              method: "POST",
-              body: payload
-            });
-            showNotice("Post saved.", "success");
-          }
-
-          resetForm();
-          await loadAdminPosts();
-          await loadPublicPosts();
-        } catch (error) {
-          showNotice(error.message || "Failed to save post.", "error");
-        }
-      }
-
       document.querySelectorAll(".filter-btn").forEach((button) => {
         button.addEventListener("click", () => {
           document.querySelectorAll(".filter-btn").forEach((item) => item.classList.toggle("active", item === button));
@@ -1043,62 +736,9 @@
         });
       });
 
-      loginForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const email = document.getElementById("emailInput").value.trim();
-        const password = document.getElementById("passwordInput").value;
-
-        try {
-          await apiRequest("/api/login", {
-            method: "POST",
-            body: {
-              username: email,
-              password
-            }
-          });
-          window.location.hash = "#admin";
-          syncAdminVisibility();
-          state.user = { email };
-          authBox.style.display = "none";
-          adminLoggedIn.style.display = "block";
-          adminEmail.textContent = email;
-          await loadAdminPosts();
-        } catch (error) {
-          showNotice(error.message || "Login failed.", "error");
-        }
-      });
-
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
-        try {
-          await apiRequest("/api/logout", { method: "POST" });
-          state.user = null;
-          window.location.hash = "";
-          syncAdminVisibility();
-          authBox.style.display = "block";
-          adminLoggedIn.style.display = "none";
-          adminEmail.textContent = "";
-          state.adminPosts = [];
-          renderAdminPosts();
-        } catch (error) {
-          showNotice(error.message || "Logout failed.", "error");
-        }
-      });
-
-      document.getElementById("resetPostBtn").addEventListener("click", () => {
-        resetForm();
-        hideNotice();
-      });
-
-      postForm.addEventListener("submit", savePost);
-
-      window.addEventListener("hashchange", syncAdminVisibility);
-      syncAdminVisibility();
-      resetForm();
-      loadPublicPosts().catch((error) => {
+      loadPosts().catch((error) => {
         console.error(error);
-      });
-      checkSession().catch((error) => {
-        console.error(error);
+        postsList.innerHTML = '<div class="detail-empty">Unable to load posts.</div>';
       });
     </script>
   </body>
