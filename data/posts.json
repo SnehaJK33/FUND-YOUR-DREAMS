@@ -103,6 +103,32 @@
     "steps": "Review the MESPOM admission and scholarship requirements, prepare the required academic and supporting documents, complete the online application, select the Erasmus Mundus scholarship option where applicable, and submit the application before the scholarship deadline.",
     "notes": "MESPOM is an Erasmus Mundus Joint Master programme. Erasmus Mundus scholarships are competitive and awarded to the highest-ranked eligible applicants. Applicants should verify the final 2027/29 deadline and requirements on the official MESPOM application website before submitting.",
     "applyLink": "https://mespom.eu/"
+  },
+     {
+    "id": "p5",
+    "type": "scholarship",
+    "level": "masters",
+    "country": "Germany, Spain, United Kingdom, Belgium, Portugal & Estonia",
+    "fundingType": "fully-funded",
+    "verified": true,
+    "status": "published",
+    "publishAt": "",
+    "views": 0,
+    "clicks": 0,
+    "createdAt": "2026-10-06T00:00:00.000Z",
+    "title": "Erasmus Mundus ILSPSD Scholarship 2027",
+    "org": "ILSPSD Consortium | Erasmus Mundus",
+    "desc": "Fully funded two-year Erasmus Mundus Joint Master's programme in International Law of Security, Peace and Sustainable Development, delivered across six European partner universities.",
+    "funding": "€1,400/month for 24 months + tuition exemption + travel + visa + installation + subsistence + insurance",
+    "deadline": "4 January 2027",
+    "image": "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1400&q=80",
+    "overview": "The Erasmus Mundus ILSPSD is a two-year international master's programme combining international law with security, peace, sustainable development, human rights, politics and global governance. Students study in at least three European countries and complete specialised coursework and a dissertation.",
+    "eligibility": "Applicants must hold a completed undergraduate degree from a fully accredited higher education institution, with at least 180 ECTS or an equivalent qualification that provides access to master's-level study in the country where the degree was awarded. Applicants must also meet the academic and English-language requirements of their selected study track. Additional French-language proficiency may be required for the Brussels track.",
+    "benefits": "Selected Erasmus Mundus scholarship recipients receive €1,400 per month for up to 24 months, tuition fee exemption, contributions toward travel, visa and installation costs, subsistence support, and health and accident insurance.",
+    "documents": "University entrance qualification or school-leaving certificate, bachelor's degree certificate, academic transcripts, personal statement, two reference letters, CV/resume, English-language proof, French-language proof if required for the Brussels track, and any additional documents required by the selected study track.",
+    "steps": "Review the ILSPSD programme structure and entry requirements, choose the study track that matches your academic background, prepare the required documents, select your first, second and third track preferences where applicable, complete the online application, and submit the application before the Erasmus Mundus scholarship deadline.",
+    "notes": "The 2027–2029 programme lasts 24 months and includes mobility across European partner universities. The scholarship application deadline is 4 January 2027 at 23:59 CET. Self-funded applicants have a separate deadline of 31 March 2027. Scholarship selection is competitive and applicants should verify the final requirements on the official application portal.",
+    "applyLink": "https://awards.leuphana.de/"
   }
 ]
 ]
