@@ -385,8 +385,50 @@
         margin-top: 22px;
       }
 
+      .post-detail {
+        display: none;
+      }
+
+      .post-detail.visible {
+        display: block;
+      }
+
+      .detail-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.9fr);
+        gap: 30px;
+        align-items: stretch;
+      }
+
+      .detail-image {
+        min-height: 260px;
+        width: 100%;
+        border-radius: 22px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .detail-summary {
+        font-size: 1.08rem;
+        color: var(--ink-soft);
+      }
+
+      .detail-list {
+        padding-left: 1.2rem;
+        color: var(--ink-soft);
+      }
+
+      .detail-list li + li {
+        margin-top: 8px;
+      }
+
+      .detail-back {
+        margin-bottom: 20px;
+      }
+
       @media (max-width: 900px) {
-        .page-grid {
+        .page-grid,
+        .detail-hero {
           grid-template-columns: 1fr;
         }
       }
@@ -434,7 +476,7 @@
       </section>
 
       <section class="page" id="posts">
-        <div class="container page-grid">
+        <div class="container page-grid" id="listingView">
           <div class="panel listing-wrap">
             <div class="toolbar">
               <h2>All listings</h2>
@@ -450,6 +492,8 @@
 
           <aside id="detailsPanel" class="panel details-panel" aria-live="polite"></aside>
         </div>
+
+        <div class="container post-detail" id="postDetailView" aria-live="polite"></div>
       </section>
 
     </main>
@@ -505,7 +549,7 @@
                 <p class="summary">${escapeHtml(post.summary || post.details || post.desc || "")}</p>
                 <div class="card-footer">
                   <span>${escapeHtml(post.host || post.org || "Host not listed")}</span>
-                  <span class="link-btn">View details</span>
+                  <a class="link-btn" href="#post/${escapeHtml(post.id)}">View details</a>
                 </div>
               </article>
             `
@@ -515,21 +559,18 @@
         postsList.querySelectorAll(".card").forEach((card) => {
           card.addEventListener("click", () => {
             state.selectedId = card.dataset.id;
-            renderPosts();
-            renderDetails();
+            window.location.hash = `post/${state.selectedId}`;
           });
         });
       }
 
       function renderDetails() {
-        const selected = state.posts.find((post) => post.id === state.selectedId) || state.posts[0];
+        const selected = state.posts.find((post) => post.id === state.selectedId);
 
         if (!selected) {
           detailsPanel.innerHTML = '<div class="detail-empty">Select a listing to read the full details.</div>';
           return;
         }
-
-        state.selectedId = selected.id;
 
         const detailHtml = `
           <div class="detail-header">
@@ -560,12 +601,142 @@
             <p>${escapeHtml(selected.details || selected.overview || "No details added yet.")}</p>
           </div>
 
+          <div class="detail-section">
+            <h3>Eligibility</h3>
+            <p>${escapeHtml(selected.eligibility || "Eligibility details are not available.")}</p>
+          </div>
+
+          <div class="detail-section">
+            <h3>Benefits</h3>
+            <p>${escapeHtml(selected.benefits || "Benefits details are not available.")}</p>
+          </div>
+
+          <div class="detail-section">
+            <h3>Application steps</h3>
+            <ul class="detail-list">
+              ${escapeHtml(selected.steps || "No application steps available.")
+                .split(/\n|\s*\.\s*/)
+                .filter((step) => step.trim())
+                .map((step) => `<li>${step.trim()}</li>`)
+                .join("")}
+            </ul>
+          </div>
+
           <div class="detail-actions">
             <a class="btn btn-primary" href="${escapeHtml(selected.link || selected.applyLink || "#")}" target="_blank" rel="noopener noreferrer">Official link</a>
+            <a class="btn btn-secondary" href="#posts">Back to listings</a>
           </div>
         `;
 
         detailsPanel.innerHTML = detailHtml;
+      }
+
+      function renderPostDetail() {
+        const selected = state.posts.find((post) => post.id === state.selectedId);
+        const detailView = document.getElementById("postDetailView");
+        const listingView = document.getElementById("listingView");
+
+        if (!selected) {
+          detailView.innerHTML = '<div class="detail-empty">This opportunity could not be found.</div>';
+          return;
+        }
+
+        const details = [
+          ["Funding", selected.funding || "Not specified"],
+          ["Deadline", formatDate(selected.deadline)],
+          ["Country", selected.country || "Global"],
+          ["Level", selected.level || "Not specified"],
+          ["Host", selected.host || selected.org || "Organization not listed"]
+        ];
+
+        detailView.innerHTML = `
+          <a class="btn btn-secondary detail-back" href="#posts">← Back to listings</a>
+          <article class="panel details-panel">
+            <div class="detail-hero">
+              <div>
+                <div class="detail-header">
+                  <span class="pill">${escapeHtml(selected.type)}</span>
+                  <span class="pill accent">${escapeHtml(selected.country || "Global")}</span>
+                </div>
+                <h1 class="detail-title">${escapeHtml(selected.title)}</h1>
+                <p class="detail-summary">${escapeHtml(selected.summary || selected.desc || "No summary available.")}</p>
+                <div class="facts">
+                  ${details
+                    .map(
+                      ([label, value]) => `
+                        <div class="fact">
+                          <span class="fact-label">${escapeHtml(label)}</span>
+                          <span class="fact-value">${escapeHtml(value)}</span>
+                        </div>
+                      `
+                    )
+                    .join("")}
+                </div>
+                <div class="detail-actions">
+                  <a class="btn btn-primary" href="${escapeHtml(selected.link || selected.applyLink || "#")}" target="_blank" rel="noopener noreferrer">Apply now</a>
+                  <a class="btn btn-secondary" href="#posts">Browse other opportunities</a>
+                </div>
+              </div>
+              <img class="detail-image" src="${escapeHtml(selected.image || "")}" alt="${escapeHtml(selected.title)}" onerror="this.style.display='none'" />
+            </div>
+
+            <div class="detail-section">
+              <h2>Overview</h2>
+              <p>${escapeHtml(selected.overview || selected.details || "No overview added yet.")}</p>
+            </div>
+
+            <div class="detail-section">
+              <h2>Eligibility</h2>
+              <p>${escapeHtml(selected.eligibility || "Eligibility details are not available.")}</p>
+            </div>
+
+            <div class="detail-section">
+              <h2>Benefits</h2>
+              <p>${escapeHtml(selected.benefits || "Benefits details are not available.")}</p>
+            </div>
+
+            <div class="detail-section">
+              <h2>Required documents</h2>
+              <p>${escapeHtml(selected.documents || "No document list available.")}</p>
+            </div>
+
+            <div class="detail-section">
+              <h2>Application steps</h2>
+              <ul class="detail-list">
+                ${escapeHtml(selected.steps || "No application steps available.")
+                  .split(/\n|\s*\.\s*/)
+                  .filter((step) => step.trim())
+                  .map((step) => `<li>${step.trim()}</li>`)
+                  .join("")}
+              </ul>
+            </div>
+
+            <div class="detail-section">
+              <h2>Notes</h2>
+              <p>${escapeHtml(selected.notes || "No additional notes available.")}</p>
+            </div>
+          </article>
+        `;
+
+        listingView.style.display = "none";
+        detailView.classList.add("visible");
+      }
+
+      function renderCurrentView() {
+        const route = window.location.hash.replace(/^#/, "");
+        const match = route.match(/^post\/([^/]+)/);
+
+        if (match && state.posts.length) {
+          state.selectedId = match[1];
+          renderPostDetail();
+          return;
+        }
+
+        document.getElementById("postDetailView").classList.remove("visible");
+        document.getElementById("listingView").style.display = "grid";
+        state.selectedId = state.posts[0]?.id || null;
+        renderPosts();
+        renderDetails();
       }
 
       async function loadPosts() {
@@ -576,17 +747,7 @@
 
         const data = await response.json();
         state.posts = (data || []).filter((post) => post.status === "published");
-
-        if (!state.selectedId && state.posts.length) {
-          state.selectedId = state.posts[0].id;
-        }
-
-        if (state.selectedId && !state.posts.some((post) => post.id === state.selectedId)) {
-          state.selectedId = state.posts[0]?.id || null;
-        }
-
-        renderPosts();
-        renderDetails();
+        renderCurrentView();
       }
 
       document.querySelectorAll(".filter-btn").forEach((button) => {
@@ -596,6 +757,8 @@
           renderPosts();
         });
       });
+
+      window.addEventListener("hashchange", renderCurrentView);
 
       loadPosts().catch((error) => {
         console.error(error);
