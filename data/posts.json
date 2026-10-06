@@ -76,5 +76,33 @@
     "steps": "Check your country Fulbright office requirements, prepare documents, submit online application, attend interviews, and complete nomination process.",
     "notes": "Requirements vary by country. Always follow your national Fulbright commission instructions.",
     "applyLink": "https://foreign.fulbrightonline.org/"
+  },
+  [
+  {
+    "id": "p4",
+    "type": "scholarship",
+    "level": "masters",
+    "country": "Austria, Sweden, United Kingdom & Greece",
+    "fundingType": "fully-funded",
+    "verified": true,
+    "status": "published",
+    "publishAt": "",
+    "views": 0,
+    "clicks": 0,
+    "createdAt": "2026-10-06T00:00:00.000Z",
+    "title": "Erasmus Mundus MESPOM Scholarship 2027/29",
+    "org": "MESPOM Consortium | Erasmus Mundus",
+    "desc": "Fully funded Erasmus Mundus Joint Master's programme in Environmental Sciences, Policy and Management, with study periods across European partner universities.",
+    "funding": "€1,400/month + travel + visa + installation + subsistence support",
+    "deadline": "7 January 2027",
+    "image": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1400&q=80",
+    "overview": "The Erasmus Mundus MESPOM programme is a two-year international master's degree focused on environmental sciences, policy and management. Students study across partner universities in Europe and can receive an Erasmus Mundus scholarship covering major study and living-related expenses.",
+    "eligibility": "Applicants must hold a bachelor's degree or equivalent qualification and meet the MESPOM programme's academic and English-language requirements. Candidates from around the world may apply, subject to the programme's specific eligibility criteria.",
+    "benefits": "Erasmus Mundus scholarship holders receive €1,400 per month for the scholarship period, together with support contributing to travel, visa, installation and subsistence costs. Erasmus Mundus scholarships cover the full duration of the master's programme, subject to the applicable funding rules.",
+    "documents": "Academic transcripts, degree certificate or proof of expected graduation, CV, motivation or personal statement, recommendation letters, proof of English-language proficiency, and other documents required by the MESPOM application system.",
+    "steps": "Review the MESPOM admission and scholarship requirements, prepare the required academic and supporting documents, complete the online application, select the Erasmus Mundus scholarship option where applicable, and submit the application before the scholarship deadline.",
+    "notes": "MESPOM is an Erasmus Mundus Joint Master programme. Erasmus Mundus scholarships are competitive and awarded to the highest-ranked eligible applicants. Applicants should verify the final 2027/29 deadline and requirements on the official MESPOM application website before submitting.",
+    "applyLink": "https://mespom.eu/"
   }
+]
 ]
