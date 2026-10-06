@@ -121,14 +121,18 @@
       }
 
       .hero {
-        padding: 40px 0 18px;
+        padding: 42px 0 22px;
       }
 
       .hero-inner {
-        background: var(--panel);
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgba(245, 106, 42, 0.09), rgba(15, 125, 115, 0.06)),
+          var(--panel);
         border: 1px solid var(--line);
-        border-radius: 28px;
-        padding: clamp(1.4rem, 3vw, 2.4rem);
+        border-radius: 30px;
+        padding: clamp(1.8rem, 5vw, 4rem);
         box-shadow: var(--shadow);
       }
 
@@ -381,149 +385,8 @@
         margin-top: 22px;
       }
 
-      .admin-shell {
-        display: none;
-        padding-top: 24px;
-      }
-
-      .admin-shell.visible {
-        display: block;
-      }
-
-      .admin-grid {
-        display: grid;
-        grid-template-columns: 360px minmax(0, 1fr);
-        gap: 18px;
-        align-items: start;
-      }
-
-      .admin-panel,
-      .manage-panel {
-        padding: 20px;
-      }
-
-      .admin-panel h2,
-      .manage-panel h2 {
-        margin-top: 0;
-        margin-bottom: 16px;
-      }
-
-      .auth-box,
-      .editor-box {
-        display: grid;
-        gap: 14px;
-      }
-
-      .field {
-        display: grid;
-        gap: 6px;
-      }
-
-      .field label {
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: var(--ink-soft);
-      }
-
-      .field input,
-      .field select,
-      .field textarea {
-        width: 100%;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: white;
-        padding: 0.75rem 0.85rem;
-        color: var(--ink);
-      }
-
-      .field textarea {
-        min-height: 120px;
-        resize: vertical;
-      }
-
-      .status-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .status-row .btn {
-        flex: 1 1 140px;
-      }
-
-      .notice {
-        border-radius: 12px;
-        padding: 0.8rem 0.9rem;
-        font-size: 0.9rem;
-        display: none;
-      }
-
-      .notice.error {
-        background: #fff1f1;
-        border: 1px solid #f3caca;
-        color: #9f2b2b;
-      }
-
-      .notice.success {
-        background: #ecfaf6;
-        border: 1px solid #bfeadf;
-        color: #145b4d;
-      }
-
-      .notice.show {
-        display: block;
-      }
-
-      .manage-list {
-        display: grid;
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .manage-item {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        align-items: center;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 10px 12px;
-        background: #fff;
-      }
-
-      .manage-item strong {
-        display: block;
-        margin-bottom: 4px;
-      }
-
-      .manage-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .mini-btn {
-        border: 1px solid var(--line);
-        background: white;
-        color: var(--ink-soft);
-        border-radius: 999px;
-        padding: 0.42rem 0.7rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .danger {
-        border-color: rgba(158, 50, 50, 0.2);
-        color: #9f2b2b;
-      }
-
-      .muted-text {
-        color: var(--muted);
-      }
-
       @media (max-width: 900px) {
-        .page-grid,
-        .admin-grid {
+        .page-grid {
           grid-template-columns: 1fr;
         }
       }
@@ -551,23 +414,21 @@
     <header class="topbar">
       <div class="container nav">
         <a href="#" class="brand">Fund <span>Your</span> Dreams</a>
-        <div class="nav-actions">
-          <a class="btn btn-secondary" href="#admin">Admin</a>
-        </div>
+        <a class="btn btn-primary" href="#posts">Explore opportunities</a>
       </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="container hero-inner">
-          <span class="eyebrow">Live opportunities</span>
-          <h1>Fully funded<br />opportunities for your next step.</h1>
+          <span class="eyebrow">Verified opportunities</span>
+          <h1>Find the funding that moves your next step forward.</h1>
           <p class="hero-copy">
-            Browse verified scholarships, internships, and fellowships in one place. Each listing includes the host,
-            funding type, deadline, summary, and official link so you can move fast.
+            Explore scholarships, internships, and fellowships with clear funding details, deadlines, and official links.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#posts">Explore listings</a>
+            <a class="btn btn-primary" href="#posts">Browse listings</a>
+            <a class="btn btn-secondary" href="#posts">Find your match</a>
           </div>
         </div>
       </section>
