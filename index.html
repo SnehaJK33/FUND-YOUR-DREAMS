@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fund Your Dreams | Scholarships, Internships and Fellowships</title>
-<meta name="description" content="Fund Your Dreams helps students find scholarships, internships and fellowships with funding details, deadlines and official links.">
+<title>Fund Your Dreams | Scholarships, Jobs, Internships and Fellowships</title>
+<meta name="description" content="Fund Your Dreams helps students find scholarships, jobs, internships and fellowships with funding details, deadlines and official links.">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fbf8f3;--ink:#17132b;--soft:#51506a;--mute:#7a7992;--line:#ebe5da;--or:#ff5a36;--vi:#6a4cff;--te:#0aa391;--pk:#ff3d77;--amber:#fff1d2;--red:#c4271f}
@@ -78,7 +78,7 @@ h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .host{color:var(--mute);font-size:.92rem}.fund{font-weight:700;color:var(--te);font-size:.95rem}
 .sum{color:var(--soft);font-size:.95rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .more{color:var(--c);font-weight:800;font-size:.93rem;margin-top:auto}
-.t-internship{--c:#ff5a36}.t-fellowship{--c:#0aa391}.t-scholarship{--c:#6a4cff}
+.t-internship{--c:#ff5a36}.t-job{--c:#c4271f}.t-fellowship{--c:#0aa391}.t-scholarship{--c:#6a4cff}
 .empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--soft);background:#fff;border:1px dashed #d8d0c0;border-radius:20px}
 .back{margin:.2rem 0 1rem}
 .sheet{background:#fff;border:1px solid var(--line);border-top:6px solid var(--c);border-radius:24px;padding:clamp(1.2rem,4vw,2.2rem)}
@@ -121,9 +121,10 @@ let posts = [], loaded = false, failed = false, lastList = "all";
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const cats = {
   internships:  {type:"internship",  name:"Internships",  icon:"💼", color:"#ff5a36", blurb:"Work experience placements, many with a stipend or travel support."},
+  jobs:         {type:"job",         name:"Jobs",         icon:"💻", color:"#c4271f", blurb:"Paid roles and career opportunities for students and graduates."},
   fellowships:  {type:"fellowship",  name:"Fellowships",  icon:"🌍", color:"#0aa391", blurb:"Funded programs for research, leadership and social impact."},
   scholarships: {type:"scholarship", name:"Scholarships", icon:"🎓", color:"#6a4cff", blurb:"Funding for your studies, from tuition to living costs."},
-  all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every internship, fellowship and scholarship in one list."}
+  all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every job, internship, fellowship and scholarship in one list."}
 };
 const host = p => p.host || p.org || "Host not listed";
 const summary = p => p.summary || p.desc || p.details || p.overview || "";
@@ -143,12 +144,12 @@ function buildNav(slug){
 }
 
 function home(){
-  const tiles = ["internships","fellowships","scholarships"].map(k => { const c = cats[k];
+  const tiles = ["internships","jobs","fellowships","scholarships"].map(k => { const c = cats[k];
     return `<a class="tile" style="--c:${c.color}" href="#/${k}"><i>${c.icon}</i><b>${c.name}</b><span>${loaded ? countOf(c.type) + " listed. " : ""}${c.blurb}</span></a>`; }).join("");
   return `<section class="hero">
 <span class="kick">Our vision</span>
 <h1>Every student deserves to find the funding for their dream.</h1>
-<p>Fund Your Dreams brings scholarships, internships and fellowships from around the world into one simple place, so talented students everywhere can discover the right opportunity and apply with confidence.</p>
+<p>Fund Your Dreams brings scholarships, jobs, internships and fellowships from around the world into one simple place, so talented students everywhere can discover the right opportunity and apply with confidence.</p>
 <div class="acts"><a class="btn w" href="#/all">Browse opportunities</a><a class="btn ghost" href="#follow">Follow us</a></div>
 </section>
 <h2 class="sec">What is Fund Your Dreams?</h2>
@@ -228,7 +229,7 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") closeMenu(); 
 function route(){
   closeMenu();
   const h = location.hash.replace(/^#\/?/, ""), v = $("view");
-  document.title = "Fund Your Dreams | Scholarships, Internships and Fellowships";
+  document.title = "Fund Your Dreams | Scholarships, Jobs, Internships and Fellowships";
   if(h === "follow"){ v.innerHTML = home(); buildNav(""); $("follow").scrollIntoView(); return; }
   const pm = h.match(/^post\/(.+)$/);
   if(pm){
