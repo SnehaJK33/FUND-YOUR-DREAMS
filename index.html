@@ -1,769 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Fund Your Dreams lists verified scholarships, internships and fellowships with official links and direct details."
-    />
-    <title>Fund Your Dreams</title>
-    <style>
-      :root {
-        --bg: #f6efe6;
-        --panel: #fffdf9;
-        --panel-strong: #ffffff;
-        --ink: #142033;
-        --ink-soft: #465876;
-        --muted: #677892;
-        --line: #e8dcc5;
-        --primary: #f56a2a;
-        --primary-dark: #dc5727;
-        --primary-soft: #fff0e7;
-        --accent: #0f7d73;
-        --accent-soft: #def3ef;
-        --shadow: 0 18px 44px rgba(17, 32, 51, 0.08);
-      }
-
-      * { box-sizing: border-box; }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background:
-          radial-gradient(circle at top left, rgba(245, 106, 42, 0.08), transparent 28%),
-          radial-gradient(circle at top right, rgba(15, 125, 115, 0.08), transparent 24%),
-          var(--bg);
-        color: var(--ink);
-        line-height: 1.55;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      button, input, select, textarea {
-        font: inherit;
-      }
-
-      .container {
-        width: min(1180px, 92vw);
-        margin: 0 auto;
-      }
-
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: rgba(255, 253, 249, 0.9);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav {
-        height: 72px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-      }
-
-      .brand {
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        font-size: clamp(1.2rem, 3vw, 1.7rem);
-      }
-
-      .brand span {
-        color: var(--primary);
-      }
-
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        border-radius: 999px;
-        padding: 0.72rem 1.2rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-      }
-
-      .btn:hover {
-        transform: translateY(-1px);
-      }
-
-      .btn-primary {
-        background: var(--primary);
-        color: white;
-        box-shadow: 0 10px 20px rgba(245, 106, 42, 0.2);
-      }
-
-      .btn-primary:hover {
-        background: var(--primary-dark);
-      }
-
-      .btn-secondary {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      .hero {
-        padding: 42px 0 22px;
-      }
-
-      .hero-inner {
-        position: relative;
-        overflow: hidden;
-        background:
-          linear-gradient(135deg, rgba(245, 106, 42, 0.09), rgba(15, 125, 115, 0.06)),
-          var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 30px;
-        padding: clamp(1.8rem, 5vw, 4rem);
-        box-shadow: var(--shadow);
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--primary-soft);
-        color: var(--primary-dark);
-        border: 1px solid #f5d6c7;
-        border-radius: 999px;
-        padding: 0.45rem 0.8rem;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 18px 0 12px;
-        font-size: clamp(2.2rem, 5vw, 4rem);
-        line-height: 1.02;
-        letter-spacing: -0.06em;
-      }
-
-      .hero-copy {
-        max-width: 62ch;
-        color: var(--ink-soft);
-        font-size: 1.04rem;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 26px;
-      }
-
-      .page {
-        padding: 18px 0 60px;
-      }
-
-      .page-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-        gap: 24px;
-        align-items: start;
-      }
-
-      .panel {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        box-shadow: var(--shadow);
-      }
-
-      .listing-wrap {
-        padding: 18px;
-      }
-
-      .toolbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 16px;
-      }
-
-      .toolbar h2 {
-        margin: 0;
-        font-size: 1.05rem;
-      }
-
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .filter-btn {
-        border: 1px solid var(--line);
-        background: white;
-        color: var(--ink-soft);
-        border-radius: 999px;
-        padding: 0.48rem 0.8rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .filter-btn.active {
-        background: var(--accent-soft);
-        border-color: #bfe8e2;
-        color: var(--accent);
-      }
-
-      .posts {
-        display: grid;
-        gap: 14px;
-      }
-
-      .card {
-        border: 1px solid var(--line);
-        background: var(--panel-strong);
-        border-radius: 18px;
-        padding: 18px 18px 14px;
-        cursor: pointer;
-        transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .card:hover {
-        border-color: #d8c8b0;
-        transform: translateY(-1px);
-      }
-
-      .card.active {
-        border-color: rgba(15, 125, 115, 0.7);
-        box-shadow: 0 10px 18px rgba(15, 125, 115, 0.08);
-      }
-
-      .meta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-
-      .pill {
-        display: inline-block;
-        background: var(--primary-soft);
-        color: var(--primary-dark);
-        border-radius: 999px;
-        padding: 0.32rem 0.7rem;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      .pill.accent {
-        background: var(--accent-soft);
-        color: var(--accent);
-      }
-
-      .card h3 {
-        margin: 0 0 8px;
-        font-size: clamp(1.1rem, 2vw, 1.45rem);
-        line-height: 1.2;
-      }
-
-      .summary {
-        color: var(--ink-soft);
-        margin: 0 0 12px;
-      }
-
-      .card-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-
-      .link-btn {
-        color: var(--accent);
-        font-weight: 700;
-      }
-
-      .details-panel {
-        padding: 20px;
-      }
-
-      .detail-empty {
-        min-height: 240px;
-        display: grid;
-        place-items: center;
-        text-align: center;
-        color: var(--muted);
-        border: 1px dashed var(--line);
-        border-radius: 16px;
-      }
-
-      .detail-header {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 10px;
-      }
-
-      .detail-title {
-        margin: 0 0 8px;
-        font-size: clamp(1.5rem, 2.8vw, 2.3rem);
-        line-height: 1.1;
-        letter-spacing: -0.04em;
-      }
-
-      .hostline {
-        color: var(--muted);
-        font-weight: 700;
-        margin: 0 0 18px;
-      }
-
-      .facts {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-bottom: 18px;
-      }
-
-      .fact {
-        padding: 12px 14px;
-        background: #faf7f1;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-      }
-
-      .fact-label {
-        display: block;
-        color: var(--muted);
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        margin-bottom: 4px;
-      }
-
-      .fact-value {
-        font-weight: 800;
-      }
-
-      .detail-section {
-        margin-top: 20px;
-      }
-
-      .detail-section h3 {
-        margin: 0 0 8px;
-        font-size: 1rem;
-      }
-
-      .detail-section p,
-      .detail-section li {
-        color: var(--ink-soft);
-      }
-
-      .detail-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 22px;
-      }
-
-      .post-detail {
-        display: none;
-      }
-
-      .post-detail.visible {
-        display: block;
-      }
-
-      .detail-hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.9fr);
-        gap: 30px;
-        align-items: stretch;
-      }
-
-      .detail-image {
-        min-height: 260px;
-        width: 100%;
-        border-radius: 22px;
-        object-fit: cover;
-        display: block;
-      }
-
-      .detail-summary {
-        font-size: 1.08rem;
-        color: var(--ink-soft);
-      }
-
-      .detail-list {
-        padding-left: 1.2rem;
-        color: var(--ink-soft);
-      }
-
-      .detail-list li + li {
-        margin-top: 8px;
-      }
-
-      .detail-back {
-        margin-bottom: 20px;
-      }
-
-      @media (max-width: 900px) {
-        .page-grid,
-        .detail-hero {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .nav {
-          height: auto;
-          padding: 16px 0;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        .facts {
-          grid-template-columns: 1fr;
-        }
-
-        .toolbar {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="container nav">
-        <a href="#" class="brand">Fund <span>Your</span> Dreams</a>
-        <a class="btn btn-primary" href="#posts">Explore opportunities</a>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container hero-inner">
-          <span class="eyebrow">Verified opportunities</span>
-          <h1>Find the funding that moves your next step forward.</h1>
-          <p class="hero-copy">
-            Explore scholarships, internships, and fellowships with clear funding details, deadlines, and official links.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#posts">Browse listings</a>
-            <a class="btn btn-secondary" href="#posts">Find your match</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="page" id="posts">
-        <div class="container page-grid" id="listingView">
-          <div class="panel listing-wrap">
-            <div class="toolbar">
-              <h2>All listings</h2>
-              <div class="filters" aria-label="Listing filters">
-                <button class="filter-btn active" data-filter="all" type="button">All</button>
-                <button class="filter-btn" data-filter="scholarship" type="button">Scholarships</button>
-                <button class="filter-btn" data-filter="internship" type="button">Internships</button>
-                <button class="filter-btn" data-filter="fellowship" type="button">Fellowships</button>
-              </div>
-            </div>
-            <div id="postsList" class="posts" aria-live="polite"></div>
-          </div>
-
-          <aside id="detailsPanel" class="panel details-panel" aria-live="polite"></aside>
-        </div>
-
-        <div class="container post-detail" id="postDetailView" aria-live="polite"></div>
-      </section>
-
-    </main>
-
-    <script>
-      const state = {
-        posts: [],
-        selectedId: null,
-        filter: "all"
-      };
-
-      const postsList = document.getElementById("postsList");
-      const detailsPanel = document.getElementById("detailsPanel");
-
-      function escapeHtml(value) {
-        return String(value || "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/\"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
-
-      function formatDate(dateValue) {
-        if (!dateValue) return "No deadline listed";
-        if (typeof dateValue === "string" && dateValue.includes("-")) {
-          const [year, month, day] = dateValue.split("-").map(Number);
-          const parsed = new Date(year, month - 1, day);
-          return parsed.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-        }
-        const date = new Date(dateValue);
-        if (Number.isNaN(date.getTime())) return dateValue;
-        return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-      }
-
-      function renderPosts() {
-        const visiblePosts = state.posts.filter((post) => state.filter === "all" || post.type === state.filter);
-
-        if (!visiblePosts.length) {
-          postsList.innerHTML = '<div class="detail-empty">No published listings match this filter yet.</div>';
-          return;
-        }
-
-        postsList.innerHTML = visiblePosts
-          .map(
-            (post) => `
-              <article class="card ${post.id === state.selectedId ? "active" : ""}" data-id="${post.id}">
-                <div class="meta-row">
-                  <span class="pill">${escapeHtml(post.type)}</span>
-                  <span class="pill accent">${escapeHtml(post.country || "Global")}</span>
-                </div>
-                <h3>${escapeHtml(post.title)}</h3>
-                <p class="summary">${escapeHtml(post.summary || post.details || post.desc || "")}</p>
-                <div class="card-footer">
-                  <span>${escapeHtml(post.host || post.org || "Host not listed")}</span>
-                  <a class="link-btn" href="#post/${escapeHtml(post.id)}">View details</a>
-                </div>
-              </article>
-            `
-          )
-          .join("");
-
-        postsList.querySelectorAll(".card").forEach((card) => {
-          card.addEventListener("click", () => {
-            state.selectedId = card.dataset.id;
-            window.location.hash = `post/${state.selectedId}`;
-          });
-        });
-      }
-
-      function renderDetails() {
-        const selected = state.posts.find((post) => post.id === state.selectedId);
-
-        if (!selected) {
-          detailsPanel.innerHTML = '<div class="detail-empty">Select a listing to read the full details.</div>';
-          return;
-        }
-
-        const detailHtml = `
-          <div class="detail-header">
-            <span class="pill">${escapeHtml(selected.type)}</span>
-            <span class="pill accent">${escapeHtml(selected.country || "Global")}</span>
-          </div>
-          <h2 class="detail-title">${escapeHtml(selected.title)}</h2>
-          <p class="hostline">${escapeHtml(selected.host || selected.org || "Organization not listed")}</p>
-
-          <div class="facts">
-            <div class="fact">
-              <span class="fact-label">Funding</span>
-              <span class="fact-value">${escapeHtml(selected.funding || "Not specified")}</span>
-            </div>
-            <div class="fact">
-              <span class="fact-label">Deadline</span>
-              <span class="fact-value">${escapeHtml(formatDate(selected.deadline))}</span>
-            </div>
-          </div>
-
-          <div class="detail-section">
-            <h3>Summary</h3>
-            <p>${escapeHtml(selected.summary || selected.desc || "No summary added yet.")}</p>
-          </div>
-
-          <div class="detail-section">
-            <h3>Full details</h3>
-            <p>${escapeHtml(selected.details || selected.overview || "No details added yet.")}</p>
-          </div>
-
-          <div class="detail-section">
-            <h3>Eligibility</h3>
-            <p>${escapeHtml(selected.eligibility || "Eligibility details are not available.")}</p>
-          </div>
-
-          <div class="detail-section">
-            <h3>Benefits</h3>
-            <p>${escapeHtml(selected.benefits || "Benefits details are not available.")}</p>
-          </div>
-
-          <div class="detail-section">
-            <h3>Application steps</h3>
-            <ul class="detail-list">
-              ${escapeHtml(selected.steps || "No application steps available.")
-                .split(/\n|\s*\.\s*/)
-                .filter((step) => step.trim())
-                .map((step) => `<li>${step.trim()}</li>`)
-                .join("")}
-            </ul>
-          </div>
-
-          <div class="detail-actions">
-            <a class="btn btn-primary" href="${escapeHtml(selected.link || selected.applyLink || "#")}" target="_blank" rel="noopener noreferrer">Official link</a>
-            <a class="btn btn-secondary" href="#posts">Back to listings</a>
-          </div>
-        `;
-
-        detailsPanel.innerHTML = detailHtml;
-      }
-
-      function renderPostDetail() {
-        const selected = state.posts.find((post) => post.id === state.selectedId);
-        const detailView = document.getElementById("postDetailView");
-        const listingView = document.getElementById("listingView");
-
-        if (!selected) {
-          detailView.innerHTML = '<div class="detail-empty">This opportunity could not be found.</div>';
-          return;
-        }
-
-        const details = [
-          ["Funding", selected.funding || "Not specified"],
-          ["Deadline", formatDate(selected.deadline)],
-          ["Country", selected.country || "Global"],
-          ["Level", selected.level || "Not specified"],
-          ["Host", selected.host || selected.org || "Organization not listed"]
-        ];
-
-        detailView.innerHTML = `
-          <a class="btn btn-secondary detail-back" href="#posts">← Back to listings</a>
-          <article class="panel details-panel">
-            <div class="detail-hero">
-              <div>
-                <div class="detail-header">
-                  <span class="pill">${escapeHtml(selected.type)}</span>
-                  <span class="pill accent">${escapeHtml(selected.country || "Global")}</span>
-                </div>
-                <h1 class="detail-title">${escapeHtml(selected.title)}</h1>
-                <p class="detail-summary">${escapeHtml(selected.summary || selected.desc || "No summary available.")}</p>
-                <div class="facts">
-                  ${details
-                    .map(
-                      ([label, value]) => `
-                        <div class="fact">
-                          <span class="fact-label">${escapeHtml(label)}</span>
-                          <span class="fact-value">${escapeHtml(value)}</span>
-                        </div>
-                      `
-                    )
-                    .join("")}
-                </div>
-                <div class="detail-actions">
-                  <a class="btn btn-primary" href="${escapeHtml(selected.link || selected.applyLink || "#")}" target="_blank" rel="noopener noreferrer">Apply now</a>
-                  <a class="btn btn-secondary" href="#posts">Browse other opportunities</a>
-                </div>
-              </div>
-              <img class="detail-image" src="${escapeHtml(selected.image || "")}" alt="${escapeHtml(selected.title)}" onerror="this.style.display='none'" />
-            </div>
-
-            <div class="detail-section">
-              <h2>Overview</h2>
-              <p>${escapeHtml(selected.overview || selected.details || "No overview added yet.")}</p>
-            </div>
-
-            <div class="detail-section">
-              <h2>Eligibility</h2>
-              <p>${escapeHtml(selected.eligibility || "Eligibility details are not available.")}</p>
-            </div>
-
-            <div class="detail-section">
-              <h2>Benefits</h2>
-              <p>${escapeHtml(selected.benefits || "Benefits details are not available.")}</p>
-            </div>
-
-            <div class="detail-section">
-              <h2>Required documents</h2>
-              <p>${escapeHtml(selected.documents || "No document list available.")}</p>
-            </div>
-
-            <div class="detail-section">
-              <h2>Application steps</h2>
-              <ul class="detail-list">
-                ${escapeHtml(selected.steps || "No application steps available.")
-                  .split(/\n|\s*\.\s*/)
-                  .filter((step) => step.trim())
-                  .map((step) => `<li>${step.trim()}</li>`)
-                  .join("")}
-              </ul>
-            </div>
-
-            <div class="detail-section">
-              <h2>Notes</h2>
-              <p>${escapeHtml(selected.notes || "No additional notes available.")}</p>
-            </div>
-          </article>
-        `;
-
-        listingView.style.display = "none";
-        detailView.classList.add("visible");
-      }
-
-      function renderCurrentView() {
-        const route = window.location.hash.replace(/^#/, "");
-        const match = route.match(/^post\/([^/]+)/);
-
-        if (match && state.posts.length) {
-          state.selectedId = match[1];
-          renderPostDetail();
-          return;
-        }
-
-        document.getElementById("postDetailView").classList.remove("visible");
-        document.getElementById("listingView").style.display = "grid";
-        state.selectedId = state.posts[0]?.id || null;
-        renderPosts();
-        renderDetails();
-      }
-
-      async function loadPosts() {
-        const response = await fetch("data/posts.json", { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error("Unable to load posts");
-        }
-
-        const data = await response.json();
-        state.posts = (data || []).filter((post) => post.status === "published");
-        renderCurrentView();
-      }
-
-      document.querySelectorAll(".filter-btn").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelectorAll(".filter-btn").forEach((item) => item.classList.toggle("active", item === button));
-          state.filter = button.dataset.filter || "all";
-          renderPosts();
-        });
-      });
-
-      window.addEventListener("hashchange", renderCurrentView);
-
-      loadPosts().catch((error) => {
-        console.error(error);
-        postsList.innerHTML = '<div class="detail-empty">Unable to load posts.</div>';
-      });
-    </script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fund Your Dreams | Scholarships, Internships and Fellowships</title>
+<meta name="description" content="Fund Your Dreams helps students find scholarships, internships and fellowships with funding details, deadlines and official links.">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8f3;--ink:#17132b;--soft:#51506a;--mute:#7a7992;--line:#ebe5da;--or:#ff5a36;--vi:#6a4cff;--te:#0aa391;--pk:#ff3d77;--amber:#fff1d2;--red:#c4271f}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Bricolage Grotesque",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #7aa7ff;outline-offset:2px}
+.side{position:fixed;inset:0 auto 0 0;width:260px;background:#fff;border-right:1px solid var(--line);padding:1.2rem 1rem;display:flex;flex-direction:column;gap:1.2rem;z-index:40;overflow-y:auto;transition:transform .25s}
+.logo{font-weight:800;font-size:1.4rem;letter-spacing:-.04em;padding:.2rem .6rem}.logo b{background:linear-gradient(90deg,var(--or),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{display:grid;gap:.3rem}
+.nav a{display:flex;align-items:center;gap:.7rem;padding:.75rem .85rem;border-radius:14px;font-weight:600;color:var(--soft)}
+.nav a i{font-style:normal;font-size:1.2rem;width:1.5rem;text-align:center}
+.nav a small{margin-left:auto;background:#f2eee6;border-radius:999px;padding:.05rem .55rem;font-size:.8rem;color:var(--soft)}
+.nav a:hover{background:#f7f3ec}
+.nav a.on{background:linear-gradient(90deg,var(--or),var(--pk));color:#fff}.nav a.on small{background:rgba(255,255,255,.25);color:#fff}
+.sidesoc{margin-top:auto;border-top:1px solid var(--line);padding:1rem .6rem 0;display:grid;gap:.4rem;font-size:.92rem;color:var(--soft)}
+.sidesoc a:hover{color:var(--or)}
+.top{display:none;position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);height:58px;align-items:center;justify-content:space-between;padding:0 4vw}
+.top .logo{padding:0}
+.menu{border:1px solid var(--line);background:#fff;border-radius:12px;padding:.5rem .9rem;font-weight:700;cursor:pointer}
+.veil{display:none;position:fixed;inset:0;background:rgba(23,19,43,.55);z-index:35}
+main{margin-left:260px;min-height:100vh}
+.page{width:min(1040px,92%);margin:0 auto;padding:1.6rem 0 3rem}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:clamp(1.8rem,6vw,4rem);color:#fff;background:linear-gradient(135deg,#ff6a3d 0%,#ff3d77 55%,#6a4cff 100%)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.14)}
+.hero::before{width:340px;height:340px;right:-90px;top:-110px}.hero::after{width:200px;height:200px;right:120px;bottom:-110px}
+.hero>*{position:relative;z-index:1}
+.kick{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;padding:.35rem .9rem;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.hero h1{font-size:clamp(2.1rem,6vw,3.8rem);line-height:1.03;letter-spacing:-.045em;margin:1rem 0 .9rem;max-width:15ch;font-weight:800}
+.hero p{max-width:54ch;font-size:1.1rem;color:rgba(255,255,255,.93)}
+.hero .acts{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;padding:.85rem 1.4rem;font-weight:700;cursor:pointer;background:var(--ink);color:#fff;text-align:center}
+.btn:hover{opacity:.9}
+.btn.w{background:#fff;color:var(--ink)}.btn.ghost{background:rgba(255,255,255,.18);color:#fff}
+.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.or{background:linear-gradient(90deg,var(--or),var(--pk))}
+h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
+.about{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.3rem}
+.box .n{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--amber);font-weight:800;margin-bottom:.6rem}
+.box h3{font-size:1.1rem;margin-bottom:.3rem}.box p{color:var(--soft);font-size:.96rem}
+.tiles{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tile{display:block;border-radius:22px;padding:1.4rem;color:#fff;background:var(--c);transition:transform .2s}
+.tile:hover{transform:translateY(-3px)}
+.tile i{font-style:normal;font-size:2rem}
+.tile b{display:block;font-size:1.3rem;margin-top:.4rem}.tile span{font-size:.95rem;opacity:.92}
+.soc{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.soc a{display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--line);border-radius:20px;padding:1rem 1.2rem}
+.soc a:hover{border-color:var(--or)}
+.soc em{font-style:normal;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:12px;color:#fff;font-weight:800;background:var(--c)}
+.soc small{display:block;font-weight:800;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mute)}
+.soc b{font-size:1.02rem}
+.safe{background:var(--amber);border-radius:14px;padding:.85rem 1.1rem;font-size:.92rem;margin-top:2.2rem}
+.ph{padding:1.6rem;border-radius:24px;color:#fff;background:var(--c)}
+.ph h1{font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:-.035em;line-height:1.1}.ph p{margin-top:.4rem;opacity:.93;max-width:56ch}
+.tools{display:grid;grid-template-columns:1fr 190px 190px;gap:.6rem;margin:1.2rem 0 .6rem}
+.tools input,.tools select{padding:.8rem .95rem;border:1px solid var(--line);border-radius:14px;background:#fff;width:100%}
+.count{color:var(--soft);font-size:.95rem;margin-bottom:.8rem}
+.list{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:20px;padding:1.2rem;display:flex;flex-direction:column;gap:.55rem;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(23,19,43,.1)}
+.card.closed{opacity:.6}
+.row{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+.badge{font-size:.74rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:8px;padding:.22rem .6rem;color:#fff;background:var(--c)}
+.chip{font-size:.82rem;font-weight:700;border-radius:8px;padding:.22rem .6rem;background:#f0ecf5;color:var(--soft)}
+.chip.soon{background:var(--amber);color:#7a4b00}.chip.late{background:#fde8e6;color:var(--red)}
+.card h3{font-size:1.2rem;line-height:1.25;letter-spacing:-.02em}
+.card h3 a::after{content:"";position:absolute;inset:0}
+.host{color:var(--mute);font-size:.92rem}.fund{font-weight:700;color:var(--te);font-size:.95rem}
+.sum{color:var(--soft);font-size:.95rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.more{color:var(--c);font-weight:800;font-size:.93rem;margin-top:auto}
+.t-internship{--c:#ff5a36}.t-fellowship{--c:#0aa391}.t-scholarship{--c:#6a4cff}
+.empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--soft);background:#fff;border:1px dashed #d8d0c0;border-radius:20px}
+.back{margin:.2rem 0 1rem}
+.sheet{background:#fff;border:1px solid var(--line);border-top:6px solid var(--c);border-radius:24px;padding:clamp(1.2rem,4vw,2.2rem)}
+.sheet h1{font-size:clamp(1.7rem,4.8vw,2.6rem);line-height:1.1;letter-spacing:-.035em;margin:.7rem 0 .3rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.7rem;margin:1.3rem 0}
+.fact{background:#faf7f1;border:1px solid var(--line);border-radius:16px;padding:.8rem .95rem}
+.fact span{display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.fact b{display:block;margin-top:.15rem}
+.sheet h2{font-size:1.15rem;margin:1.6rem 0 .4rem}
+.sheet p{color:var(--soft);white-space:pre-line}
+.sheet ol{padding-left:1.3rem;color:var(--soft)}.sheet li+li{margin-top:.45rem}
+.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem}
+footer{margin-left:260px;padding:1.4rem 4vw;color:var(--mute);font-size:.85rem;border-top:1px solid var(--line)}
+@media(max-width:860px){
+.side{transform:translateX(-100%)}.side.open{transform:none}
+.veil.show{display:block}.top{display:flex}
+main,footer{margin-left:0}
+.tools{grid-template-columns:1fr 1fr}.tools input{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<aside class="side" id="side" aria-label="Main menu">
+<a class="logo" href="#/">Fund <b>Your Dreams</b></a>
+<nav class="nav" id="nav"></nav>
+<div class="sidesoc">
+<a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer">YouTube</a>
+<a href="https://www.linkedin.com/in/fund-your-dreams-94470a405" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+</div>
+</aside>
+<div class="veil" id="veil"></div>
+<div class="top"><a class="logo" href="#/">Fund <b>Your Dreams</b></a><button class="menu" id="menu" aria-expanded="false" aria-controls="side">Menu</button></div>
+<main><div class="page" id="view"></div></main>
+<footer>Fund Your Dreams. Always confirm details on the official website before applying.</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+let posts = [], loaded = false, failed = false, lastList = "all";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cats = {
+  internships:  {type:"internship",  name:"Internships",  icon:"💼", color:"#ff5a36", blurb:"Work experience placements, many with a stipend or travel support."},
+  fellowships:  {type:"fellowship",  name:"Fellowships",  icon:"🌍", color:"#0aa391", blurb:"Funded programs for research, leadership and social impact."},
+  scholarships: {type:"scholarship", name:"Scholarships", icon:"🎓", color:"#6a4cff", blurb:"Funding for your studies, from tuition to living costs."},
+  all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every internship, fellowship and scholarship in one list."}
+};
+const host = p => p.host || p.org || "Host not listed";
+const summary = p => p.summary || p.desc || p.details || p.overview || "";
+const link = p => { const u = p.link || p.applyLink || ""; return /^https?:\/\//i.test(u) ? u : ""; };
+const countOf = t => posts.filter(p => !t || p.type === t).length;
+const catKey = p => Object.keys(cats).find(k => cats[k].type === p.type) || "all";
+
+function parseDate(v){ if(!v) return null; const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v); const d = m ? new Date(+m[1], m[2]-1, +m[3]) : new Date(v); return isNaN(d) ? null : d; }
+function daysLeft(v){ const d = parseDate(v); if(!d) return null; const n = new Date(); n.setHours(0,0,0,0); return Math.round((d - n) / 86400000); }
+function fmt(v){ const d = parseDate(v); return d ? d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}) : (v || "Not listed"); }
+function chip(v){ const n = daysLeft(v); if(n === null) return ["Deadline not listed",""]; if(n < 0) return ["Closed","late"]; if(n === 0) return ["Last day to apply","soon"]; if(n === 1) return ["1 day left","soon"]; return [n + " days left", n <= 14 ? "soon" : ""]; }
+function steps(t){ let a = String(t || "").split(/\n+/).map(s => s.trim()).filter(Boolean); if(a.length < 2) a = String(t || "").split(/(?<=[.!?])\s+(?=[A-Z])/).map(s => s.trim()).filter(Boolean); return a; }
+
+function buildNav(slug){
+  const items = [["", "Home", "🏠", ""]].concat(Object.entries(cats).map(([k,c]) => [k, c.name, c.icon, loaded ? countOf(c.type) : ""]));
+  $("nav").innerHTML = items.map(([k,n,i,c]) => `<a href="#/${k}" class="${slug === k ? "on" : ""}"><i>${i}</i>${n}${c !== "" ? `<small>${c}</small>` : ""}</a>`).join("");
+}
+
+function home(){
+  const tiles = ["internships","fellowships","scholarships"].map(k => { const c = cats[k];
+    return `<a class="tile" style="--c:${c.color}" href="#/${k}"><i>${c.icon}</i><b>${c.name}</b><span>${loaded ? countOf(c.type) + " listed. " : ""}${c.blurb}</span></a>`; }).join("");
+  return `<section class="hero">
+<span class="kick">Our vision</span>
+<h1>Every student deserves to find the funding for their dream.</h1>
+<p>Fund Your Dreams brings scholarships, internships and fellowships from around the world into one simple place, so talented students everywhere can discover the right opportunity and apply with confidence.</p>
+<div class="acts"><a class="btn w" href="#/all">Browse opportunities</a><a class="btn ghost" href="#follow">Follow us</a></div>
+</section>
+<h2 class="sec">What is Fund Your Dreams?</h2>
+<div class="about">
+<div class="box"><div class="n">1</div><h3>One place to look</h3><p>Funded opportunities are scattered across hundreds of websites. We gather them in one list.</p></div>
+<div class="box"><div class="n">2</div><h3>Clear details</h3><p>Every listing shows what is covered, who can apply, the deadline and how to apply.</p></div>
+<div class="box"><div class="n">3</div><h3>Official links only</h3><p>We always link to the official source. Applying through us never costs money.</p></div>
+</div>
+<h2 class="sec">Explore by type</h2>
+<div class="tiles">${tiles}</div>
+<h2 class="sec" id="follow">Follow us</h2>
+<div class="soc">
+<a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e1306c">IG</em><div><small>Instagram</small><b>@fundyoursdreams</b></div></a>
+<a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e62117">YT</em><div><small>YouTube</small><b>@fundyourdreams</b></div></a>
+<a href="https://www.linkedin.com/in/fund-your-dreams-94470a405" target="_blank" rel="noopener noreferrer"><em style="--c:#0a66c2">in</em><div><small>LinkedIn</small><b>Fund Your Dreams</b></div></a>
+</div>
+<div class="safe"><b>Stay safe:</b> never pay an application fee to an agent. Apply only through the official link.</div>`;
+}
+
+function listPage(slug){
+  const c = cats[slug];
+  const cs = [...new Set(posts.filter(p => !c.type || p.type === c.type).map(p => p.country).filter(Boolean))].sort();
+  return `<div class="ph" style="--c:${c.color}"><h1>${c.icon} ${c.name}</h1><p>${c.blurb}</p></div>
+<div class="tools">
+<input id="q" type="search" placeholder="Search by name, host or country" aria-label="Search">
+<select id="country" aria-label="Country"><option value="">All countries</option>${cs.map(x => `<option>${esc(x)}</option>`).join("")}</select>
+<select id="sort" aria-label="Sort"><option value="due">Closing soonest</option><option value="new">Newest added</option><option value="az">A to Z</option></select>
+</div><div class="count" id="count"></div><div class="list" id="list"></div>`;
+}
+
+function fillList(slug){
+  const c = cats[slug], q = $("q").value.trim().toLowerCase(), co = $("country").value, s = $("sort").value;
+  let list = posts.filter(p => (!c.type || p.type === c.type) && (!co || p.country === co) && (!q || [p.title, host(p), p.country, summary(p), p.funding].join(" ").toLowerCase().includes(q)));
+  const rank = p => { const n = daysLeft(p.deadline); return n === null ? 1e9 : (n < 0 ? 1e8 - n : n); };
+  if(s === "due") list.sort((a,b) => rank(a) - rank(b));
+  else if(s === "az") list.sort((a,b) => (a.title || "").localeCompare(b.title || ""));
+  else list.sort((a,b) => (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0));
+  $("count").textContent = list.length === 1 ? "1 opportunity" : list.length + " opportunities";
+  $("list").innerHTML = list.length ? list.map(p => { const [t, cl] = chip(p.deadline);
+    return `<article class="card t-${esc(p.type)} ${cl === "late" ? "closed" : ""}">
+<div class="row"><span class="badge">${esc(p.type)}</span><span class="chip ${cl}">${t}</span></div>
+<h3><a href="#/post/${encodeURIComponent(p.id)}">${esc(p.title)}</a></h3>
+<div class="host">${esc(host(p))}${p.country ? " - " + esc(p.country) : ""}</div>
+<div class="fund">${esc(p.funding || "Funding details inside")}</div>
+<div class="sum">${esc(summary(p))}</div>
+<div class="more">View full details &rarr;</div></article>`; }).join("")
+  : `<div class="empty"><p><b>${posts.length ? "No matches found." : "No opportunities posted here yet."}</b></p><p>${posts.length ? "Try a different word or country." : "Check back soon."}</p></div>`;
+}
+
+function detail(p){
+  const [t, cl] = chip(p.deadline), url = link(p), st = steps(p.steps);
+  const sec = (h, x) => x ? `<h2>${h}</h2><p>${esc(x)}</p>` : "";
+  return `<article class="sheet t-${esc(p.type)}">
+<div class="row"><span class="badge">${esc(p.type)}</span><span class="chip ${cl}">${t}</span></div>
+<h1>${esc(p.title)}</h1><div class="host">${esc(host(p))}</div>
+<div class="facts">
+<div class="fact"><span>Funding</span><b>${esc(p.funding || "Not listed")}</b></div>
+<div class="fact"><span>Deadline</span><b>${esc(fmt(p.deadline))}</b></div>
+<div class="fact"><span>Country</span><b>${esc(p.country || "Global")}</b></div>
+<div class="fact"><span>Level</span><b>${esc(p.level || "Any level")}</b></div></div>
+${sec("About this opportunity", p.overview || p.details || summary(p))}
+${sec("Who can apply", p.eligibility)}${sec("What you get", p.benefits)}${sec("Documents you need", p.documents)}
+${st.length ? `<h2>How to apply</h2><ol>${st.map(s => `<li>${esc(s)}</li>`).join("")}</ol>` : ""}
+${sec("Good to know", p.notes)}
+<div class="safe">Confirm the deadline and requirements on the official page. Never pay to apply.</div>
+<div class="actions">${url ? `<a class="btn or" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Apply on official site</a>` : ""}<button class="btn alt" id="shareBtn">Share</button></div></article>`;
+}
+
+function dataProblem(){
+  return `<div class="empty"><p><b>The opportunity list could not be loaded.</b></p><p>If you opened this file by double-clicking it, open it through GitHub Pages or a local server instead, and make sure <code>data/posts.json</code> exists.</p><p style="margin-top:.8rem"><button class="btn" onclick="location.reload()">Try again</button></p></div>`;
+}
+function closeMenu(){ $("side").classList.remove("open"); $("veil").classList.remove("show"); $("menu").setAttribute("aria-expanded","false"); }
+$("menu").onclick = () => { const o = $("side").classList.toggle("open"); $("veil").classList.toggle("show", o); $("menu").setAttribute("aria-expanded", o); };
+$("veil").onclick = closeMenu;
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeMenu(); });
+
+function route(){
+  closeMenu();
+  const h = location.hash.replace(/^#\/?/, ""), v = $("view");
+  document.title = "Fund Your Dreams | Scholarships, Internships and Fellowships";
+  if(h === "follow"){ v.innerHTML = home(); buildNav(""); $("follow").scrollIntoView(); return; }
+  const pm = h.match(/^post\/(.+)$/);
+  if(pm){
+    buildNav("");
+    if(failed){ v.innerHTML = `<a class="btn alt back" href="#/">Back to home</a>` + dataProblem(); return; }
+    if(!loaded){ v.innerHTML = '<div class="empty">Loading...</div>'; return; }
+    const p = posts.find(x => x.id === decodeURIComponent(pm[1]));
+    const back = `<a class="btn alt back" href="#/${lastList}">&larr; Back to ${cats[lastList].name.toLowerCase()}</a>`;
+    if(!p){ v.innerHTML = back + '<div class="empty">This opportunity could not be found. It may have been removed.</div>'; return; }
+    v.innerHTML = back + detail(p); document.title = p.title + " | Fund Your Dreams"; buildNav(catKey(p));
+    $("shareBtn").onclick = async () => { try{ navigator.share ? await navigator.share({title: p.title, url: location.href}) : (await navigator.clipboard.writeText(location.href), $("shareBtn").textContent = "Link copied"); }catch(e){} };
+    window.scrollTo(0,0); return;
+  }
+  if(cats[h]){
+    lastList = h; buildNav(h);
+    if(failed){ v.innerHTML = dataProblem(); return; }
+    if(!loaded){ v.innerHTML = '<div class="empty">Loading...</div>'; return; }
+    v.innerHTML = listPage(h); fillList(h);
+    ["q","country","sort"].forEach(id => $(id).addEventListener("input", () => fillList(h)));
+    window.scrollTo(0,0); return;
+  }
+  v.innerHTML = home(); buildNav(""); window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route);
+
+async function init(){
+  route();
+  try{
+    const r = await fetch("data/posts.json", {cache:"no-store"});
+    if(!r.ok) throw new Error("load failed");
+    const data = await r.json();
+    posts = (Array.isArray(data) ? data : []).filter(p => !p.status || p.status === "published").map((p,i) => ({...p, id: String(p.id ?? "p" + i)}));
+    loaded = true;
+  }catch(e){ failed = true; }
+  const h = location.hash.replace(/^#\/?/, "");
+  if(h === "" || h === "follow") buildNav(""); else route();
+  if(h === "") route();
+}
+init();
+</script>
+</body>
 </html>
