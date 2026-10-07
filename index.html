@@ -59,6 +59,18 @@ h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .soc em{font-style:normal;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:12px;color:#fff;font-weight:800;background:var(--c)}
 .soc small{display:block;font-weight:800;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mute)}
 .soc b{font-size:1.02rem}
+.rform{position:relative;background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.3rem;margin-top:1.2rem;display:grid;gap:.7rem}
+.rform h2{font-size:1.2rem}.rform label{display:grid;gap:.3rem;font-weight:600;font-size:.92rem}
+.rform input,.rform select,.rform textarea{padding:.8rem .95rem;border:1px solid var(--line);border-radius:14px;background:#fff;width:100%}
+.rform textarea{min-height:120px;resize:vertical}
+.rrow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.rmsg{min-height:1.3em;font-weight:700;font-size:.93rem}.rform small{color:var(--mute)}
+.stars{color:#f2a516;letter-spacing:.1em;font-size:1.05rem;margin-bottom:.3rem}
+@media(max-width:560px){.rrow{grid-template-columns:1fr}}
+.revs{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.rev{background:#fff;border:1px solid var(--line);border-left:5px solid var(--or);border-radius:20px;padding:1.2rem}
+.rev blockquote{color:var(--soft);white-space:pre-line}
+.rev figcaption{margin-top:.7rem;font-size:.9rem;color:var(--mute)}.rev figcaption b{color:var(--ink)}
 .safe{background:var(--amber);border-radius:14px;padding:.85rem 1.1rem;font-size:.92rem;margin-top:2.2rem}
 .ph{padding:1.6rem;border-radius:24px;color:#fff;background:var(--c)}
 .ph h1{font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:-.035em;line-height:1.1}.ph p{margin-top:.4rem;opacity:.93;max-width:56ch}
@@ -117,7 +129,58 @@ main,footer{margin-left:0}
 
 <script>
 const $ = id => document.getElementById(id);
-let posts = [], loaded = false, failed = false, lastList = "all";
+let posts = [], reviews = [], loaded = false, failed = false, lastList = "all";
+// Paste your Google Apps Script web app link here (see setup steps). Leave "" to hide the review form.
+// Reviews are stored in your own Google Sheet and appear on the site right after they are sent.
+const REVIEWS_URL = "https://script.google.com/macros/s/AKfycbz6VPApsnVe0rryL7zNJoe4L8vUzTvHE4xpkm2c47axynYLMWS2fQ8kNq7_b5tbkRtMpQ/exec";
+async function loadReviews(){
+  if(!REVIEWS_URL){ reviews = []; return; }
+  try{
+    const r = await fetch(REVIEWS_URL, {cache: "no-store"});
+    const d = await r.json();
+    reviews = (Array.isArray(d) ? d : []).filter(x => x && x.text).slice(0, 60);
+  }catch(e){ reviews = []; }
+}
+const stars = n => "★".repeat(n) + "☆".repeat(5 - n);
+const revCard = r => `<figure class="rev"><div class="stars">${stars(Math.min(5, Math.max(1, +r.rating || 5)))}</div><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.name || "Student")}</b>${r.role ? ", " + esc(r.role) : ""}</figcaption></figure>`;
+function reviewsPage(){
+  const on = !!REVIEWS_URL;
+  return `<div class="ph" style="--c:#17132b"><h1>⭐ Reviews</h1><p>Read what students say, and share your own experience.</p></div>
+${on ? `<form class="rform" id="rform">
+<h2>Write a review</h2>
+<div class="rrow"><input id="rname" maxlength="40" placeholder="Your first name (optional)"><input id="rrole" maxlength="60" placeholder="Who are you? e.g. BCA student (optional)"></div>
+<label>Your rating<select id="rrate"><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Bad</option></select></label>
+<textarea id="rtext" maxlength="600" minlength="10" required placeholder="How did Fund Your Dreams help you? What could be better?"></textarea>
+<input id="rhp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<button class="btn or" type="submit" id="rbtn">Submit review</button>
+<p class="rmsg" id="rmsg" aria-live="polite"></p>
+<small>Your review appears right away. Please be honest and kind. We remove fake or abusive reviews.</small>
+</form>` : `<div class="empty">Reviews are not switched on yet.</div>`}
+<h2 class="sec">All reviews</h2>
+<div id="rlist">${reviews.length ? `<div class="revs">${reviews.map(revCard).join("")}</div>` : `<div class="box"><h3>No reviews yet</h3><p>Be the first to share your experience.</p></div>`}</div>`;
+}
+function wireReviewForm(){
+  const f = $("rform"); if(!f) return;
+  f.addEventListener("submit", async e => {
+    e.preventDefault();
+    const msg = $("rmsg");
+    if($("rhp").value) return;
+    let last = 0; try{ last = +localStorage.getItem("fyd_last_review") || 0; }catch(x){}
+    if(Date.now() - last < 60000){ msg.textContent = "Please wait a minute before sending another review."; return; }
+    const text = $("rtext").value.trim();
+    if(text.length < 10){ msg.textContent = "Please write at least 10 characters."; return; }
+    $("rbtn").disabled = true; msg.textContent = "Sending...";
+    try{
+      const rv = {name: $("rname").value.trim().slice(0, 40), role: $("rrole").value.trim().slice(0, 60), rating: parseInt($("rrate").value, 10), text: text.slice(0, 600)};
+      await fetch(REVIEWS_URL, {method: "POST", mode: "no-cors", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify({...rv, hp: ""})});
+      reviews.unshift(rv);
+      $("rlist").innerHTML = `<div class="revs">${reviews.map(revCard).join("")}</div>`;
+      try{ localStorage.setItem("fyd_last_review", String(Date.now())); }catch(x){}
+      f.reset(); msg.textContent = "Thank you! Your review is now on the page.";
+    }catch(err){ msg.textContent = "Sorry, we could not send your review. Please try again later."; }
+    $("rbtn").disabled = false;
+  });
+}
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const cats = {
   internships:  {type:"internship",  name:"Internships",  icon:"💼", color:"#ff5a36", blurb:"Work experience placements, many with a stipend or travel support."},
@@ -139,7 +202,7 @@ function chip(v){ const n = daysLeft(v); if(n === null) return ["Deadline not li
 function steps(t){ let a = String(t || "").split(/\n+/).map(s => s.trim()).filter(Boolean); if(a.length < 2) a = String(t || "").split(/(?<=[.!?])\s+(?=[A-Z])/).map(s => s.trim()).filter(Boolean); return a; }
 
 function buildNav(slug){
-  const items = [["", "Home", "🏠", ""]].concat(Object.entries(cats).map(([k,c]) => [k, c.name, c.icon, loaded ? countOf(c.type) : ""]));
+  const items = [["", "Home", "🏠", ""]].concat(Object.entries(cats).map(([k,c]) => [k, c.name, c.icon, loaded ? countOf(c.type) : ""]), [["reviews", "Reviews", "⭐", ""]]);
   $("nav").innerHTML = items.map(([k,n,i,c]) => `<a href="#/${k}" class="${slug === k ? "on" : ""}"><i>${i}</i>${n}${c !== "" ? `<small>${c}</small>` : ""}</a>`).join("");
 }
 
@@ -166,6 +229,9 @@ function home(){
 <a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e62117">YT</em><div><small>YouTube</small><b>@fundyourdreams</b></div></a>
 <a href="https://www.linkedin.com/in/fund-your-dreams-94470a405" target="_blank" rel="noopener noreferrer"><em style="--c:#0a66c2">in</em><div><small>LinkedIn</small><b>Fund Your Dreams</b></div></a>
 </div>
+<h2 class="sec">What students say</h2>
+${reviews.length ? `<div class="revs">${reviews.slice(0, 3).map(revCard).join("")}</div>` : `<div class="box"><h3>Be one of our first reviewers</h3><p>Tried the site? Tell us what helped and what could be better.</p></div>`}
+<p style="margin-top:1rem"><a class="btn or" href="#/reviews">${reviews.length ? "Read all reviews and write yours" : "Write a review"}</a></p>
 <div class="safe"><b>Stay safe:</b> never pay an application fee to an agent. Apply only through the official link.</div>`;
 }
 
@@ -243,6 +309,9 @@ function route(){
     $("shareBtn").onclick = async () => { try{ navigator.share ? await navigator.share({title: p.title, url: location.href}) : (await navigator.clipboard.writeText(location.href), $("shareBtn").textContent = "Link copied"); }catch(e){} };
     window.scrollTo(0,0); return;
   }
+  if(h === "reviews"){
+    buildNav("reviews"); v.innerHTML = reviewsPage(); wireReviewForm(); window.scrollTo(0,0); return;
+  }
   if(cats[h]){
     lastList = h; buildNav(h);
     if(failed){ v.innerHTML = dataProblem(); return; }
@@ -264,6 +333,7 @@ async function init(){
     posts = (Array.isArray(data) ? data : []).filter(p => !p.status || p.status === "published").map((p,i) => ({...p, id: String(p.id ?? "p" + i)}));
     loaded = true;
   }catch(e){ failed = true; }
+  await loadReviews();
   const h = location.hash.replace(/^#\/?/, "");
   if(h === "" || h === "follow") buildNav(""); else route();
   if(h === "") route();
