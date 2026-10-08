@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fund Your Dreams | Scholarships, Jobs, Internships and Fellowships</title>
-<meta name="description" content="Fund Your Dreams helps students find scholarships, jobs, internships and fellowships with funding details, deadlines and official links.">
+<title>Fund Your Dreams | Scholarships, Jobs, Internships, Fellowships and Conferences</title>
+<meta name="description" content="Fund Your Dreams helps students find scholarships, jobs, internships, fellowships, conferences and summits with funding details, deadlines and official links.">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fbf8f3;--ink:#17132b;--soft:#51506a;--mute:#7a7992;--line:#ebe5da;--or:#ff5a36;--vi:#6a4cff;--te:#0aa391;--pk:#ff3d77;--amber:#fff1d2;--red:#c4271f}
@@ -91,7 +91,7 @@ h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .host{color:var(--mute);font-size:.92rem}.fund{font-weight:700;color:var(--te);font-size:.95rem}
 .sum{color:var(--soft);font-size:.95rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .more{color:var(--c);font-weight:800;font-size:.93rem;margin-top:auto}
-.t-internship{--c:#ff5a36}.t-job{--c:#c4271f}.t-fellowship{--c:#0aa391}.t-scholarship{--c:#6a4cff}
+.t-internship{--c:#ff5a36}.t-job{--c:#c4271f}.t-fellowship{--c:#0aa391}.t-conference{--c:#1b6fd6}.t-scholarship{--c:#6a4cff}
 .empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--soft);background:#fff;border:1px dashed #d8d0c0;border-radius:20px}
 .back{margin:.2rem 0 1rem}
 .sheet{background:#fff;border:1px solid var(--line);border-top:6px solid var(--c);border-radius:24px;padding:clamp(1.2rem,4vw,2.2rem)}
@@ -134,13 +134,16 @@ let posts = [], reviews = [], loaded = false, failed = false, lastList = "all";
 // Paste your Google Apps Script web app link here (see setup steps). Leave "" to hide the review form.
 // Reviews are stored in your own Google Sheet and appear on the site right after they are sent.
 const REVIEWS_URL = "https://script.google.com/macros/s/AKfycbz6VPApsnVe0rryL7zNJoe4L8vUzTvHE4xpkm2c47axynYLMWS2fQ8kNq7_b5tbkRtMpQ/exec";
+let reviewsError = "";
 async function loadReviews(){
   if(!REVIEWS_URL){ reviews = []; return; }
   try{
-    const r = await fetch(REVIEWS_URL, {cache: "no-store"});
-    const d = await r.json();
+    const r = await fetch(REVIEWS_URL + "?t=" + Date.now(), {cache: "no-store"});
+    const t = await r.text();
+    let d; try{ d = JSON.parse(t); }catch(e){ throw new Error("The link did not return review data (check the access setting)"); }
     reviews = (Array.isArray(d) ? d : []).filter(x => x && x.text).slice(0, 60);
-  }catch(e){ reviews = []; }
+    reviewsError = "";
+  }catch(e){ reviews = []; reviewsError = String(e.message || e); console.warn("Reviews could not be loaded:", e); }
 }
 const stars = n => "★".repeat(n) + "☆".repeat(5 - n);
 const revCard = r => `<figure class="rev"><div class="stars">${stars(Math.min(5, Math.max(1, +r.rating || 5)))}</div><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.name || "Student")}</b>${r.role ? ", " + esc(r.role) : ""}</figcaption></figure>`;
@@ -158,6 +161,7 @@ ${on ? `<form class="rform" id="rform">
 <small>Your review appears right away. Please be honest and kind. We remove fake or abusive reviews.</small>
 </form>` : `<div class="empty">Reviews are not switched on yet.</div>`}
 <h2 class="sec">All reviews</h2>
+${reviewsError ? `<div class="safe" style="margin-top:0">We could not load reviews right now. Please try again later.${/[?&]debug/.test(location.search) ? "<br><small>Debug: " + esc(reviewsError) + "</small>" : ""}</div>` : ""}
 <div id="rlist">${reviews.length ? `<div class="revs">${reviews.map(revCard).join("")}</div>` : `<div class="box"><h3>No reviews yet</h3><p>Be the first to share your experience.</p></div>`}</div>`;
 }
 function wireReviewForm(){
@@ -187,8 +191,9 @@ const cats = {
   internships:  {type:"internship",  name:"Internships",  icon:"💼", color:"#ff5a36", blurb:"Work experience placements, many with a stipend or travel support."},
   jobs:         {type:"job",         name:"Jobs",         icon:"💻", color:"#c4271f", blurb:"Paid roles and career opportunities for students and graduates."},
   fellowships:  {type:"fellowship",  name:"Fellowships",  icon:"🌍", color:"#0aa391", blurb:"Funded programs for research, leadership and social impact."},
+  conferences:  {type:"conference",  name:"Conferences",  icon:"🎤", color:"#1b6fd6", blurb:"Conferences, summits and events to learn, network and present. Many offer free passes or travel grants."},
   scholarships: {type:"scholarship", name:"Scholarships", icon:"🎓", color:"#6a4cff", blurb:"Funding for your studies, from tuition to living costs."},
-  all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every job, internship, fellowship and scholarship in one list."}
+  all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every job, internship, fellowship, conference and scholarship in one list."}
 };
 const host = p => p.host || p.org || "Host not listed";
 const summary = p => p.summary || p.desc || p.details || p.overview || "";
@@ -208,12 +213,12 @@ function buildNav(slug){
 }
 
 function home(){
-  const tiles = ["internships","jobs","fellowships","scholarships"].map(k => { const c = cats[k];
+  const tiles = ["internships","jobs","fellowships","conferences","scholarships"].map(k => { const c = cats[k];
     return `<a class="tile" style="--c:${c.color}" href="#/${k}"><i>${c.icon}</i><b>${c.name}</b><span>${loaded ? countOf(c.type) + " listed. " : ""}${c.blurb}</span></a>`; }).join("");
   return `<section class="hero">
 <span class="kick">Our vision</span>
 <h1>Every student deserves to find the funding for their dream.</h1>
-<p>Fund Your Dreams brings scholarships, jobs, internships and fellowships from around the world into one simple place, so talented students everywhere can discover the right opportunity and apply with confidence.</p>
+<p>Fund Your Dreams brings scholarships, jobs, internships, fellowships, conferences and summits from around the world into one simple place, so talented students everywhere can discover the right opportunity and apply with confidence.</p>
 <div class="acts"><a class="btn w" href="#/all">Browse opportunities</a><a class="btn ghost" href="#/reviews/read">⭐ Student reviews</a><a class="btn ghost" href="#follow">Follow us</a></div>
 </section>
 <h2 class="sec">What is Fund Your Dreams?</h2>
@@ -276,7 +281,7 @@ function detail(p){
 <div class="fact"><span>Funding</span><b>${esc(p.funding || "Not listed")}</b></div>
 <div class="fact"><span>Deadline</span><b>${esc(fmt(p.deadline))}</b></div>
 <div class="fact"><span>Country</span><b>${esc(p.country || "Global")}</b></div>
-<div class="fact"><span>Level</span><b>${esc(p.level || "Any level")}</b></div></div>
+<div class="fact"><span>Level</span><b>${esc(p.level || "Any level")}</b></div>${p.eventDate ? `<div class="fact"><span>Event date</span><b>${esc(fmt(p.eventDate))}</b></div>` : ""}${p.location ? `<div class="fact"><span>Location</span><b>${esc(p.location)}</b></div>` : ""}</div>
 ${sec("About this opportunity", p.overview || p.details || summary(p))}
 ${sec("Who can apply", p.eligibility)}${sec("What you get", p.benefits)}${sec("Documents you need", p.documents)}
 ${st.length ? `<h2>How to apply</h2><ol>${st.map(s => `<li>${esc(s)}</li>`).join("")}</ol>` : ""}
@@ -296,7 +301,7 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") closeMenu(); 
 function route(){
   closeMenu();
   const h = location.hash.replace(/^#\/?/, ""), v = $("view");
-  document.title = "Fund Your Dreams | Scholarships, Jobs, Internships and Fellowships";
+  document.title = "Fund Your Dreams | Scholarships, Jobs, Internships, Fellowships and Conferences";
   if(h === "follow"){ v.innerHTML = home(); buildNav(""); $("follow").scrollIntoView(); return; }
   const pm = h.match(/^post\/(.+)$/);
   if(pm){
