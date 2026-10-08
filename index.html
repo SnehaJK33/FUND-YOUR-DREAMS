@@ -121,6 +121,7 @@ main,footer{margin-left:0}
 <a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer">Instagram</a>
 <a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer">YouTube</a>
 <a href="https://www.linkedin.com/in/fund-your-dreams-94470a405" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<a href="https://whatsapp.com/channel/0029Vb8wJff8fewkELjNUD11" target="_blank" rel="noopener noreferrer">WhatsApp Channel</a>
 </div>
 </aside>
 <div class="veil" id="veil"></div>
@@ -195,6 +196,7 @@ const cats = {
   scholarships: {type:"scholarship", name:"Scholarships", icon:"🎓", color:"#6a4cff", blurb:"Funding for your studies, from tuition to living costs."},
   all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every job, internship, fellowship, conference and scholarship in one list."}
 };
+const ALL_COUNTRIES = "Global|Afghanistan|Albania|Algeria|Andorra|Angola|Antigua and Barbuda|Argentina|Armenia|Australia|Austria|Azerbaijan|Bahamas|Bahrain|Bangladesh|Barbados|Belarus|Belgium|Belize|Benin|Bhutan|Bolivia|Bosnia and Herzegovina|Botswana|Brazil|Brunei|Bulgaria|Burkina Faso|Burundi|Cabo Verde|Cambodia|Cameroon|Canada|Central African Republic|Chad|Chile|China|Colombia|Comoros|Congo|Costa Rica|Côte d'Ivoire|Croatia|Cuba|Cyprus|Czech Republic|Democratic Republic of the Congo|Denmark|Djibouti|Dominica|Dominican Republic|Ecuador|Egypt|El Salvador|Equatorial Guinea|Eritrea|Estonia|Eswatini|Ethiopia|Fiji|Finland|France|Gabon|Gambia|Georgia|Germany|Ghana|Greece|Grenada|Guatemala|Guinea|Guinea-Bissau|Guyana|Haiti|Honduras|Hungary|Iceland|India|Indonesia|Iran|Iraq|Ireland|Israel|Italy|Jamaica|Japan|Jordan|Kazakhstan|Kenya|Kiribati|Kosovo|Kuwait|Kyrgyzstan|Laos|Latvia|Lebanon|Lesotho|Liberia|Libya|Liechtenstein|Lithuania|Luxembourg|Madagascar|Malawi|Malaysia|Maldives|Mali|Malta|Marshall Islands|Mauritania|Mauritius|Mexico|Micronesia|Moldova|Monaco|Mongolia|Montenegro|Morocco|Mozambique|Myanmar|Namibia|Nauru|Nepal|Netherlands|New Zealand|Nicaragua|Niger|Nigeria|North Korea|North Macedonia|Norway|Oman|Pakistan|Palau|Palestine|Panama|Papua New Guinea|Paraguay|Peru|Philippines|Poland|Portugal|Qatar|Romania|Russia|Rwanda|Saint Kitts and Nevis|Saint Lucia|Saint Vincent and the Grenadines|Samoa|San Marino|São Tomé and Príncipe|Saudi Arabia|Senegal|Serbia|Seychelles|Sierra Leone|Singapore|Slovakia|Slovenia|Solomon Islands|Somalia|South Africa|South Korea|South Sudan|Spain|Sri Lanka|Sudan|Suriname|Sweden|Switzerland|Syria|Taiwan|Tajikistan|Tanzania|Thailand|Timor-Leste|Togo|Tonga|Trinidad and Tobago|Tunisia|Turkey|Turkmenistan|Tuvalu|Uganda|Ukraine|United Arab Emirates|United Kingdom|United States|Uruguay|Uzbekistan|Vanuatu|Vatican City|Venezuela|Vietnam|Yemen|Zambia|Zimbabwe".split("|");
 const host = p => p.host || p.org || "Host not listed";
 const summary = p => p.summary || p.desc || p.details || p.overview || "";
 const link = p => { const u = p.link || p.applyLink || ""; return /^https?:\/\//i.test(u) ? u : ""; };
@@ -234,6 +236,7 @@ function home(){
 <a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e1306c">IG</em><div><small>Instagram</small><b>@fundyoursdreams</b></div></a>
 <a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e62117">YT</em><div><small>YouTube</small><b>@fundyourdreams</b></div></a>
 <a href="https://www.linkedin.com/in/fund-your-dreams-94470a405" target="_blank" rel="noopener noreferrer"><em style="--c:#0a66c2">in</em><div><small>LinkedIn</small><b>Fund Your Dreams</b></div></a>
+<a href="https://whatsapp.com/channel/0029Vb8wJff8fewkELjNUD11" target="_blank" rel="noopener noreferrer"><em style="--c:#25d366">WA</em><div><small>WhatsApp</small><b>Join our channel</b></div></a>
 </div>
 <h2 class="sec">What students say</h2>
 ${reviews.length ? `<div class="revs">${reviews.slice(0, 3).map(revCard).join("")}</div>` : `<div class="box"><h3>Be one of our first reviewers</h3><p>Tried the site? Tell us what helped and what could be better.</p></div>`}
@@ -243,7 +246,7 @@ ${reviews.length ? `<div class="revs">${reviews.slice(0, 3).map(revCard).join(""
 
 function listPage(slug){
   const c = cats[slug];
-  const cs = [...new Set(posts.filter(p => !c.type || p.type === c.type).map(p => p.country).filter(Boolean))].sort();
+  const cs = [...new Set([...ALL_COUNTRIES, ...posts.map(p => p.country).filter(Boolean)])].sort();
   return `<div class="ph" style="--c:${c.color}"><h1>${c.icon} ${c.name}</h1><p>${c.blurb}</p></div>
 <div class="tools">
 <input id="q" type="search" placeholder="Search by name, host or country" aria-label="Search">
