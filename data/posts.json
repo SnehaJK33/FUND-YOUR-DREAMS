@@ -512,5 +512,36 @@
   "steps": "Visit the official NASA Space Apps Challenge 2026 website\nRegister and review the available challenge statements\nChoose a challenge and form a team if desired\nDevelop a solution using NASA and partner agencies' open data\nSubmit the project before the official submission deadline",
   "notes": "The hackathon is scheduled for November 14–15, 2026. The official page states that project submissions open on November 14 at 9:00 AM and close on November 15 at 11:59 PM local time. Check the official website for registration details, local event availability, submission rules, and award eligibility. This is a hackathon, not a funded internship or scholarship.",
   "applyLink": "https://www.spaceappschallenge.org/2026/"
+  },
+  {
+  "id": "p21",
+  "type": "conference",
+  "level": "all",
+  "country": "Belgium",
+  "title": "Youth Diplomacy Convention 2027",
+  "organization": "Organisation for Global Peace and Sustainability (OGPS)",
+  "location": "Brussels, Belgium",
+  "mode": "In-person",
+  "startDate": "2027-03-22",
+  "endDate": "2027-03-25",
+  "deadline": null,
+  "fundingType": "partial-funded",
+  "fundingDetails": "Competitive scholarship categories may provide airfare support, hotel accommodation for eligible participants, and meals during programme days. Scholarship applications have an administrative fee of £11.99. Funding is competitive and not guaranteed.",
+  "eligibility": "Open to all nationalities and backgrounds, ages 17–47. Scholarship awards are competitive and merit-based; applicants should review the official eligibility and funding terms.",
+  "description": "The Youth Diplomacy Convention 2027 is a four-day international programme bringing together young leaders and changemakers for dialogue, cultural exchange, leadership workshops, and global networking, with a focus on diplomacy, peace, and international cooperation.",
+  "benefits": [
+    "Leadership and diplomacy workshops",
+    "International networking opportunities",
+    "Cultural exchange",
+    "Certificate of participation",
+    "Airfare support for eligible scholarship categories",
+    "Hotel accommodation for eligible scholarship categories",
+    "Meals during programme days"
+  ],
+  "applyLink": "https://ogps.uk/ydc2027/",
+  "verified": false,
+  "status": "published",
+  "publishAt": "2026-10-09",
+  "createdAt": "2026-10-09"
   }
 ]
