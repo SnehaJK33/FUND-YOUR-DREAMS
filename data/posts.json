@@ -489,7 +489,7 @@
   },
   {
   "id": "p20",
-  "type": "Competition",
+  "type": "competition",
   "level": "all",
   "country": "Global",
   "fundingType": "free-participation",
@@ -506,32 +506,11 @@
   "deadline": "2026-11-15",
   "image": "",
   "overview": "The 2026 NASA Space Apps Challenge takes place on November 14–15, 2026, under the theme 'The Next Frontier.' Participants can join an eligible local event or explore virtual participation options. Registration is available through the official event website, subject to the event's registration rules.",
-  "eligibility": [
-    "Open to people of all ages, backgrounds, and skill levels",
-    "Suitable for students, developers, researchers, designers, and space enthusiasts",
-    "Participants can collaborate in teams",
-    "Interest in space, Earth science, technology, or problem-solving is helpful"
-  ],
-  "benefits": [
-    "Experience participating in a global NASA-associated hackathon",
-    "Build a practical project using open space and Earth science data",
-    "Strengthen programming, data analysis, AI, teamwork, and presentation skills",
-    "Create a project to showcase in a portfolio or CV",
-    "Potential opportunity for recognition through the challenge's award process"
-  ],
-  "documents": [
-    "Participant registration details",
-    "Team information, if participating as a team",
-    "Project description and submission materials as required by the selected challenge"
-  ],
-  "steps": [
-    "Visit the official NASA Space Apps Challenge 2026 website",
-    "Register and review the available challenge statements",
-    "Choose a challenge and form a team if desired",
-    "Develop a solution using NASA and partner agencies' open data",
-    "Submit the project before the official submission deadline"
-  ],
+  "eligibility": "Open to people of all ages, backgrounds, and skill levels.\nSuitable for students, developers, researchers, designers, and space enthusiasts.\nParticipants can collaborate in teams.\nInterest in space, Earth science, technology, or problem-solving is helpful.",
+  "benefits": "Experience participating in a global NASA-associated hackathon.\nBuild a practical project using open space and Earth science data.\nStrengthen programming, data analysis, AI, teamwork, and presentation skills.\nCreate a project to showcase in a portfolio or CV.\nPotential opportunity for recognition through the challenge's award process.",
+  "documents": "Participant registration details.\nTeam information, if participating as a team.\nProject description and submission materials as required by the selected challenge.",
+  "steps": "Visit the official NASA Space Apps Challenge 2026 website\nRegister and review the available challenge statements\nChoose a challenge and form a team if desired\nDevelop a solution using NASA and partner agencies' open data\nSubmit the project before the official submission deadline",
   "notes": "The hackathon is scheduled for November 14–15, 2026. The official page states that project submissions open on November 14 at 9:00 AM and close on November 15 at 11:59 PM local time. Check the official website for registration details, local event availability, submission rules, and award eligibility. This is a hackathon, not a funded internship or scholarship.",
   "applyLink": "https://www.spaceappschallenge.org/2026/"
-  }
+}
 ]
