@@ -748,5 +748,33 @@
   "steps": "Find French universities offering a suitable eligible programme\nContact the university's international relations or admissions office about Eiffel nominations and its internal deadline\nFollow the university's application and selection process\nIf the university selects and supports you, it submits your scholarship application to Campus France",
   "notes": "6 January 2027 is the deadline for French institutions to submit applications to Campus France. Universities may set earlier deadlines for students, so contact your chosen institution as soon as possible.\n\nOfficial pages:\n2027 announcement: https://www.campusfrance.org/en/actu/call-for-france-excellence-eiffel-applications-2027\nScholarship details and application procedure: https://www.campusfrance.org/en/the-france-excellence-eiffel-scholarship-program",
   "applyLink": "https://www.campusfrance.org/en/the-france-excellence-eiffel-scholarship-program"
- }
+ },
+  {
+  "id": "p30",
+  "type": "conference",
+  "level": "Any level",
+  "country": "Iceland",
+  "fundingType": "full-and-partial",
+  "verified": true,
+  "status": "published",
+  "publishAt": "2026-10-10",
+  "views": 0,
+  "clicks": 0,
+  "createdAt": "2026-10-10",
+  "title": "Iceland Writers Retreat Alumni Award 2027",
+  "org": "Iceland Writers Retreat",
+  "location": "Reykjavík, Iceland",
+  "eventDate": "14–18 April 2027",
+  "desc": "Full and partial awards for writers to attend the Iceland Writers Retreat in Reykjavík. Open to writers of all backgrounds and experience levels, chosen mainly on writing potential and financial need.",
+  "funding": "Full award: retreat package + 4 nights' accommodation + round-trip flight. Partial award: retreat package only.",
+  "deadline": "2026-10-15",
+  "image": "",
+  "overview": "The Iceland Writers Retreat Alumni Award 2027 gives full and partial financial support to writers who want to attend the Iceland Writers Retreat in Reykjavík, Iceland, from 14 to 18 April 2027.\n\nWriters of all backgrounds and experience levels are welcome to apply. Selection is based mainly on writing potential and financial need.",
+  "eligibility": "At least 18 years old by 14 April 2027.\nWriters of all backgrounds and experience levels are welcome.\nYou must show financial need.\nYour writing interests should fit the retreat's 2027 faculty, especially literary fiction, nonfiction and memoir.\nNot eligible: family members of the judges, and people who have taken part in the Iceland Writers Retreat before.",
+  "benefits": "Full Award:\nStandard retreat package, including five writing classes and one day trip.\nFour nights of accommodation in Reykjavík.\nRound-trip airfare from a major international airport.\n\nPartial Award:\nStandard retreat package, including five writing classes and one day trip.\nFlights and accommodation are not included.\n\nNot covered by either award: airport transfers, travel insurance, visas, certain meals and personal expenses. Visa support letters can be provided when needed.",
+  "documents": "A statement of impact: why you want to attend and how you will share the experience.\nA creative writing sample of no more than 1,000 words (prose, fiction, nonfiction or memoir).\nTwo references as PDF files.\nAn acknowledgment of financial need.\nReferences should come from people who understand the role writing plays in your life, and must be uploaded with the application, not emailed separately.",
+  "steps": "Read the official award eligibility criteria and funding details\nPrepare your writing sample, statement of impact and two references\nComplete the online application through the official platform linked on the scholarship page\nSubmit your application before the deadline",
+  "notes": "Deadline: 15 October 2026, 11:59 p.m. GMT.\nApplication fee: US$10.\n\nApplications are competitive. Explain your financial situation honestly, submit complete documents and make sure your writing sample shows your best work.",
+  "applyLink": "https://icelandwritersretreat.com/scholarships/"
+  }
 ]
