@@ -562,5 +562,31 @@
   "steps": "Check that your country is on the official list for the Master's or the PhD\nFind your nominating agency, because direct applications to the CSC are not accepted\nCheck your nominator's own rules, since their deadline may be earlier\nChoose an eligible UK course and university (PhD: three university and supervisor choices)\nPrepare transcripts, references and other documents early\nApply through CSC Central and complete the nomination process\nSubmit before 20 October 2026, 16:00 BST",
   "notes": "CSC deadline: 20 October 2026, 16:00 BST. Your nominating agency may set an earlier deadline. Results are expected by July 2027. There is no CSC application fee, so never pay anyone to guarantee a place.\n\nOfficial pages:\nMaster's: https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/\nPhD: https://cscuk.fcdo.gov.uk/scholarships/commonwealth-phd-scholarships/",
   "applyLink": "https://cscuk.fcdo.gov.uk/"
+  },
+  {
+  "id": "p23",
+  "type": "scholarship",
+  "level": "Postgraduate",
+  "country": "United Kingdom",
+  "fundingType": "fully-funded",
+  "verified": true,
+  "status": "published",
+  "publishAt": "2026-10-10",
+  "views": 0,
+  "clicks": 0,
+  "createdAt": "2026-10-10",
+  "title": "Rhodes Scholarship 2027 at Oxford University",
+  "org": "Rhodes Trust | University of Oxford, UK",
+  "desc": "Prestigious fully funded postgraduate scholarship for outstanding students from around the world to study at the University of Oxford. Covers course fees and a yearly living stipend.",
+  "funding": "Oxford course fees + annual living stipend (£21,060 for 2026-27)",
+  "deadline": "Varies by constituency",
+  "image": "",
+  "overview": "The Rhodes Scholarship is a prestigious, fully funded postgraduate scholarship that lets outstanding students from around the world study at the University of Oxford in the United Kingdom. It is run by the Rhodes Trust and looks for academically excellent people who show leadership, strong character and a commitment to serving others.\n\nThe 2027 cohort is for candidates starting at Oxford in October 2027. Scholars normally study for two years on eligible full-time postgraduate programmes, and certain approved pathways have extra conditions.",
+  "eligibility": "Open to eligible candidates from participating Rhodes constituencies around the world. Requirements differ by constituency and may include:\nCitizenship or residency rules.\nAge criteria.\nStrong academic achievement.\nEligibility for the chosen full-time postgraduate course at Oxford.\nEvidence of leadership, initiative, character and commitment to service.\nEnglish-language level that meets Oxford University's requirements.\nUse the official eligibility checker and read the candidate information document for your constituency before applying.",
+  "benefits": "Payment of Oxford University course fees.\nAn annual stipend to help cover living costs, including accommodation.\nStipend of £21,060 for 2026-27, paid in monthly instalments. The rate may change for 2027-28.\nFunding for the standard scholarship tenure, subject to the official conditions.",
+  "documents": "Requirements depend on your constituency. In general, prepare:\nApplication materials required by your constituency.\nReferee details (referees also have their own deadline).\nEvidence of academic achievement.\nEnglish-language evidence that meets Oxford's requirements.\nOxford postgraduate course application, if you are selected.",
+  "steps": "Identify the correct Rhodes constituency for your circumstances\nReview the eligibility criteria and deadlines for that constituency\nPrepare the required application materials and referee information\nSubmit your application through the official process\nIf selected, apply to your Oxford postgraduate course and meet its admission requirements",
+  "notes": "Deadlines differ for each constituency. The India constituency for 2027 closed at 23:59 IST on 23 July 2026, and its referee deadline was 6 August 2026. Applicants from other regions must check their own constituency page for the current deadline.\n\nSelection looks beyond grades: academic excellence, leadership potential, integrity, commitment to service and the ability to contribute positively to the world. Meeting the minimum requirements does not guarantee selection, and the scholarship is highly competitive.\n\nImportant: winning the Rhodes Scholarship does not automatically mean admission to Oxford. You must also meet the university's admission requirements.\n\nOfficial pages:\nAll constituencies: https://www.rhodeshouse.ox.ac.uk/scholarships/applications/\nIndia constituency: https://www.rhodeshouse.ox.ac.uk/scholarships/applications/india/\nAbout the scholarship: https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+  "applyLink": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/"
   }
 ]
