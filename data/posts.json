@@ -536,5 +536,31 @@
   "eligibility": "Open to all nationalities and backgrounds, ages 17–47. Scholarship awards are competitive and merit-based; applicants should review the official eligibility and funding terms.",
   "benefits": "Leadership and diplomacy workshops.\nInternational networking opportunities.\nCultural exchange.\nCertificate of participation.\nAirfare support for eligible scholarship categories.\nHotel accommodation for eligible scholarship categories.\nMeals during programme days.",
   "applyLink": "https://ogps.uk/ydc2027/"
+  },
+  {
+  "id": "p22",
+  "type": "scholarship",
+  "level": "Master's and PhD",
+  "country": "United Kingdom",
+  "fundingType": "fully-funded",
+  "verified": true,
+  "status": "published",
+  "publishAt": "2026-10-10",
+  "views": 0,
+  "clicks": 0,
+  "createdAt": "2026-10-10",
+  "title": "Commonwealth Scholarships 2027/28 (Master's and PhD)",
+  "org": "Commonwealth Scholarship Commission (CSC) | UK FCDO",
+  "desc": "Fully funded UK government scholarships for Master's and PhD study in the UK, for students from eligible Commonwealth countries. Tuition, flights and a monthly allowance are covered.",
+  "funding": "Full tuition + return airfare + monthly living allowance (£1,712 outside London, £2,000 in London)",
+  "deadline": "2026-10-20",
+  "image": "",
+  "overview": "The Commonwealth Scholarships are funded by the UK Foreign, Commonwealth & Development Office and run by the Commonwealth Scholarship Commission in the UK. They support talented students who could not otherwise afford UK study, and who want to use their education to help development in their home countries.\n\nTwo programmes are open for 2027/28: Master's Scholarships (full-time taught Master's) and PhD Scholarships (full-time PhD, 36 months).",
+  "eligibility": "Citizen of, or refugee in, an eligible Commonwealth country, and living there permanently.\nFirst degree of at least upper second-class (2:1), or a lower second plus a relevant postgraduate degree.\nUnable to afford UK study without the scholarship.\nAvailable to start in September/October 2027.\nMaster's and PhD have different country lists. India is eligible for the Master's but NOT for the PhD.\nPhD applicants must not already be registered for a PhD before September/October 2026.",
+  "benefits": "Approved tuition fees covered in full.\nApproved return economy airfare.\nMonthly living allowance: £1,712 outside London, £2,000 in London.\nStudy travel grant.\nPhD only: overseas fieldwork support and a paid mid-term visit home.\nChild or family allowances and disability support may be available.\nNo IELTS needed for the CSC application, but your university may have its own English requirement.",
+  "documents": "Passport or national ID.\nFull academic transcripts (certified English translations if needed).\nTwo signed references on letterhead, uploaded as PDFs.\nPhD only: signed supporting statement from a proposed UK supervisor.\nPhD only: research plan and Development Impact statement.\nPersonal statement and career plans.",
+  "steps": "Check that your country is on the official list for the Master's or the PhD\nFind your nominating agency, because direct applications to the CSC are not accepted\nCheck your nominator's own rules, since their deadline may be earlier\nChoose an eligible UK course and university (PhD: three university and supervisor choices)\nPrepare transcripts, references and other documents early\nApply through CSC Central and complete the nomination process\nSubmit before 20 October 2026, 16:00 BST",
+  "notes": "CSC deadline: 20 October 2026, 16:00 BST. Your nominating agency may set an earlier deadline. Results are expected by July 2027. There is no CSC application fee, so never pay anyone to guarantee a place.\n\nOfficial pages:\nMaster's: https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/\nPhD: https://cscuk.fcdo.gov.uk/scholarships/commonwealth-phd-scholarships/",
+  "applyLink": "https://cscuk.fcdo.gov.uk/"
   }
 ]
