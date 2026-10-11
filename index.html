@@ -103,6 +103,8 @@ h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .sheet h2{font-size:1.15rem;margin:1.6rem 0 .4rem}
 .sheet p{color:var(--soft);white-space:pre-line}
 .sheet ol{padding-left:1.3rem;color:var(--soft)}.sheet li+li{margin-top:.45rem}
+.sheet p a,.sheet li a{color:var(--vi);font-weight:600;text-decoration:underline;word-break:break-all}
+.sheet p a:hover,.sheet li a:hover{color:var(--or)}
 .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem}
 footer{margin-left:260px;padding:1.4rem 4vw;color:var(--mute);font-size:.85rem;border-top:1px solid var(--line)}
 @media(max-width:860px){
@@ -188,6 +190,7 @@ function wireReviewForm(){
   });
 }
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const linkify = s => esc(s).replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)])|([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})/g, (m, u, e) => u ? `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>` : `<a href="mailto:${e}">${e}</a>`);
 const cats = {
   internships:  {type:"internship",  name:"Internships",  icon:"💼", color:"#ff5a36", blurb:"Work experience placements, many with a stipend or travel support."},
   jobs:         {type:"job",         name:"Jobs",         icon:"💻", color:"#c4271f", blurb:"Paid roles and career opportunities for students and graduates."},
@@ -198,6 +201,8 @@ const cats = {
   all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every job, internship, fellowship, conference and scholarship in one list."}
 };
 const ALL_COUNTRIES = "Global|Afghanistan|Albania|Algeria|Andorra|Angola|Antigua and Barbuda|Argentina|Armenia|Australia|Austria|Azerbaijan|Bahamas|Bahrain|Bangladesh|Barbados|Belarus|Belgium|Belize|Benin|Bhutan|Bolivia|Bosnia and Herzegovina|Botswana|Brazil|Brunei|Bulgaria|Burkina Faso|Burundi|Cabo Verde|Cambodia|Cameroon|Canada|Central African Republic|Chad|Chile|China|Colombia|Comoros|Congo|Costa Rica|Côte d'Ivoire|Croatia|Cuba|Cyprus|Czech Republic|Democratic Republic of the Congo|Denmark|Djibouti|Dominica|Dominican Republic|Ecuador|Egypt|El Salvador|Equatorial Guinea|Eritrea|Estonia|Eswatini|Ethiopia|Fiji|Finland|France|Gabon|Gambia|Georgia|Germany|Ghana|Greece|Grenada|Guatemala|Guinea|Guinea-Bissau|Guyana|Haiti|Honduras|Hungary|Iceland|India|Indonesia|Iran|Iraq|Ireland|Israel|Italy|Jamaica|Japan|Jordan|Kazakhstan|Kenya|Kiribati|Kosovo|Kuwait|Kyrgyzstan|Laos|Latvia|Lebanon|Lesotho|Liberia|Libya|Liechtenstein|Lithuania|Luxembourg|Madagascar|Malawi|Malaysia|Maldives|Mali|Malta|Marshall Islands|Mauritania|Mauritius|Mexico|Micronesia|Moldova|Monaco|Mongolia|Montenegro|Morocco|Mozambique|Myanmar|Namibia|Nauru|Nepal|Netherlands|New Zealand|Nicaragua|Niger|Nigeria|North Korea|North Macedonia|Norway|Oman|Pakistan|Palau|Palestine|Panama|Papua New Guinea|Paraguay|Peru|Philippines|Poland|Portugal|Qatar|Romania|Russia|Rwanda|Saint Kitts and Nevis|Saint Lucia|Saint Vincent and the Grenadines|Samoa|San Marino|São Tomé and Príncipe|Saudi Arabia|Senegal|Serbia|Seychelles|Sierra Leone|Singapore|Slovakia|Slovenia|Solomon Islands|Somalia|South Africa|South Korea|South Sudan|Spain|Sri Lanka|Sudan|Suriname|Sweden|Switzerland|Syria|Taiwan|Tajikistan|Tanzania|Thailand|Timor-Leste|Togo|Tonga|Trinidad and Tobago|Tunisia|Turkey|Turkmenistan|Tuvalu|Uganda|Ukraine|United Arab Emirates|United Kingdom|United States|Uruguay|Uzbekistan|Vanuatu|Vatican City|Venezuela|Vietnam|Yemen|Zambia|Zimbabwe".split("|");
+const TYPE_FIX = {"competitions & programs":"competition","competitions and programs":"competition","competitions":"competition","hackathon":"competition","hackathons":"competition","program":"competition","programs":"competition","internships":"internship","jobs":"job","fellowships":"fellowship","conferences":"conference","scholarships":"scholarship"};
+const fixType = t => { const k = String(t || "").trim().toLowerCase(); return TYPE_FIX[k] || k; };
 const host = p => p.host || p.org || "Host not listed";
 const summary = p => p.summary || p.desc || p.details || p.overview || "";
 const link = p => { const u = p.link || p.applyLink || ""; return /^https?:\/\//i.test(u) ? u : ""; };
@@ -277,7 +282,7 @@ function fillList(slug){
 
 function detail(p){
   const [t, cl] = chip(p.deadline), url = link(p), st = steps(p.steps);
-  const sec = (h, x) => x ? `<h2>${h}</h2><p>${esc(x)}</p>` : "";
+  const sec = (h, x) => x ? `<h2>${h}</h2><p>${linkify(x)}</p>` : "";
   return `<article class="sheet t-${esc(p.type)}">
 <div class="row"><span class="badge">${esc(p.type)}</span><span class="chip ${cl}">${t}</span></div>
 <h1>${esc(p.title)}</h1><div class="host">${esc(host(p))}</div>
@@ -288,7 +293,7 @@ function detail(p){
 <div class="fact"><span>Level</span><b>${esc(p.level || "Any level")}</b></div>${p.eventDate ? `<div class="fact"><span>Event date</span><b>${esc(fmt(p.eventDate))}</b></div>` : ""}${p.location ? `<div class="fact"><span>Location</span><b>${esc(p.location)}</b></div>` : ""}</div>
 ${sec("About this opportunity", p.overview || p.details || summary(p))}
 ${sec("Who can apply", p.eligibility)}${sec("What you get", p.benefits)}${sec("Documents you need", p.documents)}
-${st.length ? `<h2>How to apply</h2><ol>${st.map(s => `<li>${esc(s)}</li>`).join("")}</ol>` : ""}
+${st.length ? `<h2>How to apply</h2><ol>${st.map(s => `<li>${linkify(s)}</li>`).join("")}</ol>` : ""}
 ${sec("Good to know", p.notes)}
 <div class="safe">Confirm the deadline and requirements on the official page. Never pay to apply.</div>
 <div class="actions">${url ? `<a class="btn or" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Apply on official site</a>` : ""}<button class="btn alt" id="shareBtn">Share</button></div></article>`;
@@ -342,7 +347,7 @@ async function init(){
     const r = await fetch("data/posts.json", {cache:"no-store"});
     if(!r.ok) throw new Error("load failed");
     const data = await r.json();
-    posts = (Array.isArray(data) ? data : []).filter(p => !p.status || p.status === "published").map((p,i) => ({...p, id: String(p.id ?? "p" + i)}));
+    posts = (Array.isArray(data) ? data : []).filter(p => !p.status || p.status === "published").map((p,i) => ({...p, id: String(p.id ?? "p" + i), type: fixType(p.type)}));
     loaded = true;
   }catch(e){ failed = true; }
   await loadReviews();
