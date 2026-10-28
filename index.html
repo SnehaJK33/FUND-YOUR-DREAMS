@@ -5,20 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fund Your Dreams | Scholarships, Jobs, Internships, Fellowships and Conferences</title>
 <meta name="description" content="Fund Your Dreams helps students find scholarships, jobs, internships, fellowships, conferences and summits with funding details, deadlines and official links.">
+<meta name="theme-color" content="#e0245e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fund Your Dreams">
+<meta property="og:description" content="Scholarships, internships, fellowships, jobs and conferences with deadlines and official links.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fbf8f3;--ink:#17132b;--soft:#51506a;--mute:#7a7992;--line:#ebe5da;--or:#ff5a36;--vi:#6a4cff;--te:#0aa391;--pk:#ff3d77;--amber:#fff1d2;--red:#c4271f}
+:root{--bg:#fbf8f3;--ink:#17132b;--soft:#51506a;--mute:#6b6a82;--line:#ebe5da;--or:#d9411b;--vi:#6a4cff;--te:#08796c;--pk:#e0245e;--amber:#fff1d2;--red:#c4271f}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:"Bricolage Grotesque",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px}
 a{color:inherit;text-decoration:none}
-button,input,select{font:inherit;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid #7aa7ff;outline-offset:2px}
+#view:focus{outline:none}
 .side{position:fixed;inset:0 auto 0 0;width:260px;background:#fff;border-right:1px solid var(--line);padding:1.2rem 1rem;display:flex;flex-direction:column;gap:1.2rem;z-index:40;overflow-y:auto;transition:transform .25s}
 .logo{font-weight:800;font-size:1.4rem;letter-spacing:-.04em;padding:.2rem .6rem}.logo b{background:linear-gradient(90deg,var(--or),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent}
 .nav{display:grid;gap:.3rem}
 .nav a{display:flex;align-items:center;gap:.7rem;padding:.75rem .85rem;border-radius:14px;font-weight:600;color:var(--soft)}
-.nav a i{font-style:normal;font-size:1.2rem;width:1.5rem;text-align:center}
+.nav a i{font-style:normal;font-size:1.2rem;width:1.5rem;text-align:center;flex:none}
 .nav a small{margin-left:auto;background:#f2eee6;border-radius:999px;padding:.05rem .55rem;font-size:.8rem;color:var(--soft)}
 .nav a:hover{background:#f7f3ec}
 .nav a.on{background:linear-gradient(90deg,var(--or),var(--pk));color:#fff}.nav a.on small{background:rgba(255,255,255,.25);color:#fff}
@@ -30,58 +39,60 @@ button,input,select{font:inherit;color:inherit}
 .veil{display:none;position:fixed;inset:0;background:rgba(23,19,43,.55);z-index:35}
 main{margin-left:260px;min-height:100vh}
 .page{width:min(1040px,92%);margin:0 auto;padding:1.6rem 0 3rem}
-.hero{position:relative;overflow:hidden;border-radius:28px;padding:clamp(1.8rem,6vw,4rem);color:#fff;background:linear-gradient(135deg,#ff6a3d 0%,#ff3d77 55%,#6a4cff 100%)}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:clamp(1.8rem,6vw,4rem);color:#fff;background:linear-gradient(135deg,#d9411b 0%,#e0245e 55%,#6a4cff 100%)}
 .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.14)}
 .hero::before{width:340px;height:340px;right:-90px;top:-110px}.hero::after{width:200px;height:200px;right:120px;bottom:-110px}
 .hero>*{position:relative;z-index:1}
 .kick{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;padding:.35rem .9rem;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .hero h1{font-size:clamp(2.1rem,6vw,3.8rem);line-height:1.03;letter-spacing:-.045em;margin:1rem 0 .9rem;max-width:15ch;font-weight:800}
-.hero p{max-width:54ch;font-size:1.1rem;color:rgba(255,255,255,.93)}
-.hero .acts{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
+.hero p{max-width:54ch;font-size:1.1rem}
+.acts{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;padding:.85rem 1.4rem;font-weight:700;cursor:pointer;background:var(--ink);color:#fff;text-align:center}
-.btn:hover{opacity:.9}
-.btn.w{background:#fff;color:var(--ink)}.btn.ghost{background:rgba(255,255,255,.18);color:#fff}
+.btn:hover{opacity:.9}.btn:disabled{opacity:.6;cursor:wait}
+.btn.w{background:#fff;color:var(--ink)}.btn.ghost{background:rgba(0,0,0,.22);color:#fff}
 .btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .btn.or{background:linear-gradient(90deg,var(--or),var(--pk))}
 h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
-.about{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.about,.tiles,.soc,.revs{display:grid;gap:.9rem}
+.about,.soc{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.tiles{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.revs{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.3rem}
 .box .n{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--amber);font-weight:800;margin-bottom:.6rem}
 .box h3{font-size:1.1rem;margin-bottom:.3rem}.box p{color:var(--soft);font-size:.96rem}
-.tiles{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .tile{display:block;border-radius:22px;padding:1.4rem;color:#fff;background:var(--c);transition:transform .2s}
 .tile:hover{transform:translateY(-3px)}
 .tile i{font-style:normal;font-size:2rem}
-.tile b{display:block;font-size:1.3rem;margin-top:.4rem}.tile span{font-size:.95rem;opacity:.92}
-.soc{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.tile b{display:block;font-size:1.3rem;margin-top:.4rem}.tile span{font-size:.95rem}
 .soc a{display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--line);border-radius:20px;padding:1rem 1.2rem}
 .soc a:hover{border-color:var(--or)}
 .soc em{font-style:normal;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:12px;color:#fff;font-weight:800;background:var(--c)}
 .soc small{display:block;font-weight:800;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mute)}
-.soc b{font-size:1.02rem}
 .acts2{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
 .rform{position:relative;background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.3rem;margin-top:1.2rem;display:grid;gap:.7rem}
-.rform h2{font-size:1.2rem}.rform label{display:grid;gap:.3rem;font-weight:600;font-size:.92rem}
+.rform h2{font-size:1.2rem}
 .rform input,.rform select,.rform textarea{padding:.8rem .95rem;border:1px solid var(--line);border-radius:14px;background:#fff;width:100%}
+.rform label{font-weight:600;font-size:.92rem;display:grid;gap:.3rem}
 .rform textarea{min-height:120px;resize:vertical}
 .rrow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .rmsg{min-height:1.3em;font-weight:700;font-size:.93rem}.rform small{color:var(--mute)}
-.stars{color:#f2a516;letter-spacing:.1em;font-size:1.05rem;margin-bottom:.3rem}
+.stars{color:#b87400;letter-spacing:.1em;font-size:1.05rem;margin-bottom:.3rem}
 @media(max-width:560px){.rrow{grid-template-columns:1fr}}
-.revs{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .rev{background:#fff;border:1px solid var(--line);border-left:5px solid var(--or);border-radius:20px;padding:1.2rem}
 .rev blockquote{color:var(--soft);white-space:pre-line}
 .rev figcaption{margin-top:.7rem;font-size:.9rem;color:var(--mute)}.rev figcaption b{color:var(--ink)}
 .safe{background:var(--amber);border-radius:14px;padding:.85rem 1.1rem;font-size:.92rem;margin-top:2.2rem}
 .ph{padding:1.6rem;border-radius:24px;color:#fff;background:var(--c)}
-.ph h1{font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:-.035em;line-height:1.1}.ph p{margin-top:.4rem;opacity:.93;max-width:56ch}
+.ph h1{font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:-.035em;line-height:1.1}.ph p{margin-top:.4rem;max-width:56ch}
 .tools{display:grid;grid-template-columns:1fr 190px 190px;gap:.6rem;margin:1.2rem 0 .6rem}
 .tools input,.tools select{padding:.8rem .95rem;border:1px solid var(--line);border-radius:14px;background:#fff;width:100%}
-.count{color:var(--soft);font-size:.95rem;margin-bottom:.8rem}
+.meta{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--soft);font-size:.95rem;margin-bottom:.8rem}
+.meta label{display:flex;gap:.4rem;align-items:center;cursor:pointer}
 .list{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.card,.sheet{--c:#51506a}
 .card{position:relative;background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:20px;padding:1.2rem;display:flex;flex-direction:column;gap:.55rem;transition:transform .2s,box-shadow .2s}
 .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(23,19,43,.1)}
-.card.closed{opacity:.6}
+.card.closed{opacity:.65}
 .row{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
 .badge{font-size:.74rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:8px;padding:.22rem .6rem;color:#fff;background:var(--c)}
 .chip{font-size:.82rem;font-weight:700;border-radius:8px;padding:.22rem .6rem;background:#f0ecf5;color:var(--soft)}
@@ -91,7 +102,7 @@ h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .host{color:var(--mute);font-size:.92rem}.fund{font-weight:700;color:var(--te);font-size:.95rem}
 .sum{color:var(--soft);font-size:.95rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .more{color:var(--c);font-weight:800;font-size:.93rem;margin-top:auto}
-.t-internship{--c:#ff5a36}.t-job{--c:#c4271f}.t-fellowship{--c:#0aa391}.t-conference{--c:#1b6fd6}.t-scholarship{--c:#6a4cff}.t-competition{--c:#d6336c}
+.t-internship{--c:#d9411b}.t-job{--c:#c4271f}.t-fellowship{--c:#08796c}.t-conference{--c:#1b6fd6}.t-scholarship{--c:#6a4cff}.t-competition{--c:#d6336c}
 .empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--soft);background:#fff;border:1px dashed #d8d0c0;border-radius:20px}
 .back{margin:.2rem 0 1rem}
 .sheet{background:#fff;border:1px solid var(--line);border-top:6px solid var(--c);border-radius:24px;padding:clamp(1.2rem,4vw,2.2rem)}
@@ -108,7 +119,7 @@ h2.sec{font-size:1.5rem;letter-spacing:-.03em;margin:2.6rem 0 1rem}
 .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem}
 footer{margin-left:260px;padding:1.4rem 4vw;color:var(--mute);font-size:.85rem;border-top:1px solid var(--line)}
 @media(max-width:860px){
-.side{transform:translateX(-100%)}.side.open{transform:none}
+.side{transform:translateX(-100%);visibility:hidden}.side.open{transform:none;visibility:visible}
 .veil.show{display:block}.top{display:flex}
 main,footer{margin-left:0}
 .tools{grid-template-columns:1fr 1fr}.tools input{grid-column:1/-1}}
@@ -118,7 +129,7 @@ main,footer{margin-left:0}
 <body>
 <aside class="side" id="side" aria-label="Main menu">
 <a class="logo" href="#/">Fund <b>Your Dreams</b></a>
-<nav class="nav" id="nav"></nav>
+<nav class="nav" id="nav" aria-label="Categories"></nav>
 <div class="sidesoc">
 <a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer">Instagram</a>
 <a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer">YouTube</a>
@@ -128,107 +139,120 @@ main,footer{margin-left:0}
 </aside>
 <div class="veil" id="veil"></div>
 <div class="top"><a class="logo" href="#/">Fund <b>Your Dreams</b></a><button class="menu" id="menu" aria-expanded="false" aria-controls="side">Menu</button></div>
-<main><div class="page" id="view"></div></main>
-<footer>Fund Your Dreams. Always confirm details on the official website before applying.</footer>
+<main><div class="page" id="view" tabindex="-1"><noscript><div class="empty">Please turn on JavaScript to see opportunities.</div></noscript></div></main>
+<footer>Fund Your Dreams. Always confirm details on the official website before applying. Reviews are public.</footer>
 
 <script>
-const $ = id => document.getElementById(id);
-let posts = [], reviews = [], loaded = false, failed = false, lastList = "all";
-// Paste your Google Apps Script web app link here (see setup steps). Leave "" to hide the review form.
-// Reviews are stored in your own Google Sheet and appear on the site right after they are sent.
-const REVIEWS_URL = "https://script.google.com/macros/s/AKfycbz6VPApsnVe0rryL7zNJoe4L8vUzTvHE4xpkm2c47axynYLMWS2fQ8kNq7_b5tbkRtMpQ/exec";
-let reviewsError = "";
-async function loadReviews(){
-  if(!REVIEWS_URL){ reviews = []; return; }
+const $=id=>document.getElementById(id);
+let posts=[],reviews=[],loaded=false,failed=false,lastList="all",rErr="";
+const filt={q:"",country:"",sort:"due",closed:false};
+// Your Google Apps Script web app link. Leave "" to hide the review form.
+const REVIEWS_URL="https://script.google.com/macros/s/AKfycbz6VPApsnVe0rryL7zNJoe4L8vUzTvHE4xpkm2c47axynYLMWS2fQ8kNq7_b5tbkRtMpQ/exec";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const linkify=s=>esc(s).replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)])|([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})/g,(m,u,e)=>u?`<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`:`<a href="mailto:${e}">${e}</a>`);
+const cats={
+internships:{type:"internship",name:"Internships",icon:"💼",color:"#d9411b",blurb:"Work experience placements, many with a stipend or travel support."},
+jobs:{type:"job",name:"Jobs",icon:"💻",color:"#c4271f",blurb:"Paid roles and career opportunities for students and graduates."},
+fellowships:{type:"fellowship",name:"Fellowships",icon:"🌍",color:"#08796c",blurb:"Funded programs for research, leadership and social impact."},
+conferences:{type:"conference",name:"Conferences",icon:"🎤",color:"#1b6fd6",blurb:"Conferences, summits and events to learn, network and present. Many offer free passes or travel grants."},
+scholarships:{type:"scholarship",name:"Scholarships",icon:"🎓",color:"#6a4cff",blurb:"Funding for your studies, from tuition to living costs."},
+competitions:{type:"competition",name:"Competitions & Programs",icon:"🏆",color:"#d6336c",blurb:"Hackathons, contests, challenges and programs to build your skills and win prizes, grants and recognition."},
+all:{type:"",name:"All opportunities",icon:"✨",color:"#17132b",blurb:"Every job, internship, fellowship, conference and scholarship in one list."}};
+const TYPE_FIX={"competitions & programs":"competition","competitions and programs":"competition",competitions:"competition",competition:"competition",hackathon:"competition",hackathons:"competition",contest:"competition",challenge:"competition",award:"competition",program:"competition",programs:"competition",internships:"internship",jobs:"job",fellowships:"fellowship",conferences:"conference",summit:"conference",summits:"conference",workshop:"conference",event:"conference",scholarships:"scholarship",grant:"scholarship",grants:"scholarship"};
+const fixType=t=>{const k=String(t||"").trim().toLowerCase();return TYPE_FIX[k]||k};
+const tc=t=>String(t||"").replace(/[^a-z]/g,"");
+const host=p=>p.host||p.org||"Host not listed";
+const summary=p=>p.summary||p.desc||p.details||p.overview||"";
+const link=p=>{const u=p.link||p.applyLink||"";return/^https?:\/\//i.test(u)?u:""};
+const places=p=>[p.country,...(Array.isArray(p.eligibleCountries)?p.eligibleCountries:String(p.eligibleCountries||"").split(","))].map(x=>String(x||"").trim()).filter(Boolean);
+const catKey=p=>Object.keys(cats).find(k=>cats[k].type===p.type)||"all";
+function parseDate(v){if(!v)return null;const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(v);const d=m?new Date(+m[1],m[2]-1,+m[3]):new Date(v);return isNaN(d)?null:d}
+function daysLeft(v){const d=parseDate(v);if(!d)return null;const n=new Date();n.setHours(0,0,0,0);return Math.round((d-n)/864e5)}
+const isOpen=p=>{const n=daysLeft(p.deadline);return n===null||n>=0};
+const countOf=t=>posts.filter(p=>(!t||p.type===t)&&isOpen(p)).length;
+function fmt(v){const d=parseDate(v);return d?d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}):(v||"Not listed")}
+function chip(v){const n=daysLeft(v);if(n===null)return["Rolling or not listed",""];if(n<0)return["Closed","late"];if(n===0)return["Last day to apply","soon"];if(n===1)return["1 day left","soon"];return[n+" days left",n<=14?"soon":""]}
+function steps(t){const s=String(t||"").trim();let a=s.split(/\n+/).map(x=>x.trim()).filter(Boolean);if(a.length<2)a=s.replace(/([.!?])\s+(?=[A-Z])/g,"$1\n").split("\n").map(x=>x.trim()).filter(Boolean);return a}
+
+async function loadPosts(){
   try{
-    const r = await fetch(REVIEWS_URL + "?t=" + Date.now(), {cache: "no-store"});
-    const t = await r.text();
-    let d; try{ d = JSON.parse(t); }catch(e){ throw new Error("The link did not return review data (check the access setting)"); }
-    reviews = (Array.isArray(d) ? d : []).filter(x => x && x.text).slice(0, 60);
-    reviewsError = "";
-  }catch(e){ reviews = []; reviewsError = String(e.message || e); console.warn("Reviews could not be loaded:", e); }
+    const r=await fetch("data/posts.json",{cache:"no-store"});if(!r.ok)throw 0;
+    const d=await r.json();
+    posts=(Array.isArray(d)?d:[]).filter(p=>p&&(!p.status||p.status==="published")).map((p,i)=>({...p,id:String(p.id??"p"+i),type:fixType(p.type)}));
+    const bad=posts.filter(p=>!Object.values(cats).some(c=>c.type===p.type));
+    if(bad.length)console.warn("Posts with an unknown type (only shown in All):",bad.map(p=>[p.id,p.type]));
+    loaded=true;
+  }catch(e){failed=true}
 }
-const stars = n => "★".repeat(n) + "☆".repeat(5 - n);
-const revCard = r => `<figure class="rev"><div class="stars">${stars(Math.min(5, Math.max(1, +r.rating || 5)))}</div><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.name || "Student")}</b>${r.role ? ", " + esc(r.role) : ""}</figcaption></figure>`;
+async function loadReviews(){
+  if(!REVIEWS_URL)return;
+  try{
+    const r=await fetch(REVIEWS_URL+"?t="+Date.now(),{cache:"no-store"});const t=await r.text();
+    let d;try{d=JSON.parse(t)}catch(e){throw new Error("The link did not return review data (check the access setting)")}
+    reviews=(Array.isArray(d)?d:[]).filter(x=>x&&x.text).slice(0,60);rErr="";
+  }catch(e){reviews=[];rErr=String(e.message||e);console.warn("Reviews could not be loaded:",e)}
+}
+const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
+const revCard=r=>`<figure class="rev"><div class="stars" role="img" aria-label="${Math.min(5,Math.max(1,+r.rating||5))} out of 5">${stars(Math.min(5,Math.max(1,+r.rating||5)))}</div><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.name||"Student")}</b>${r.role?", "+esc(r.role):""}</figcaption></figure>`;
+const revList=()=>(rErr?`<div class="safe" style="margin-top:0">We could not load reviews right now. Please try again later.${/[?&]debug/.test(location.search)?"<br><small>Debug: "+esc(rErr)+"</small>":""}</div>`:"")+(reviews.length?`<div class="revs">${reviews.map(revCard).join("")}</div>`:`<div class="box"><h3>No reviews yet</h3><p>Be the first to share your experience.</p></div>`);
 function reviewsPage(){
-  const on = !!REVIEWS_URL;
-  return `<a class="btn alt back" href="#/">&larr; Back to home</a><div class="ph" style="--c:#17132b"><h1>⭐ Reviews</h1><p>Read what students say, and share your own experience.</p></div>
-${on ? `<form class="rform" id="rform">
+  return`<a class="btn alt back" href="#/">&larr; Back to home</a><div class="ph" style="--c:#17132b"><h1>⭐ Reviews</h1><p>Read what students say, and share your own experience.</p></div>
+${REVIEWS_URL?`<form class="rform" id="rform">
 <h2>Write a review</h2>
-<div class="rrow"><input id="rname" maxlength="40" placeholder="Your first name (optional)"><input id="rrole" maxlength="60" placeholder="Who are you? e.g. BCA student (optional)"></div>
+<div class="rrow"><input id="rname" maxlength="40" aria-label="Your first name (optional)" placeholder="Your first name (optional)"><input id="rrole" maxlength="60" aria-label="Who are you (optional)" placeholder="Who are you? e.g. BCA student (optional)"></div>
 <label>Your rating<select id="rrate"><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Bad</option></select></label>
-<textarea id="rtext" maxlength="600" minlength="10" required placeholder="How did Fund Your Dreams help you? What could be better?"></textarea>
+<label>Your review<textarea id="rtext" maxlength="600" minlength="10" required placeholder="How did Fund Your Dreams help you? What could be better?"></textarea></label>
 <input id="rhp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
 <button class="btn or" type="submit" id="rbtn">Submit review</button>
 <p class="rmsg" id="rmsg" aria-live="polite"></p>
-<small>Your review appears right away. Please be honest and kind. We remove fake or abusive reviews.</small>
-</form>` : `<div class="empty">Reviews are not switched on yet.</div>`}
-<h2 class="sec">All reviews</h2>
-${reviewsError ? `<div class="safe" style="margin-top:0">We could not load reviews right now. Please try again later.${/[?&]debug/.test(location.search) ? "<br><small>Debug: " + esc(reviewsError) + "</small>" : ""}</div>` : ""}
-<div id="rlist">${reviews.length ? `<div class="revs">${reviews.map(revCard).join("")}</div>` : `<div class="box"><h3>No reviews yet</h3><p>Be the first to share your experience.</p></div>`}</div>`;
+<small>Reviews are public and may be checked before they appear. Please be honest and kind. We remove fake or abusive reviews.</small>
+</form>`:`<div class="empty">Reviews are not switched on yet.</div>`}
+<h2 class="sec">All reviews</h2><div id="rlist">${revList()}</div>`;
 }
 function wireReviewForm(){
-  const f = $("rform"); if(!f) return;
-  f.addEventListener("submit", async e => {
-    e.preventDefault();
-    const msg = $("rmsg");
-    if($("rhp").value) return;
-    let last = 0; try{ last = +localStorage.getItem("fyd_last_review") || 0; }catch(x){}
-    if(Date.now() - last < 60000){ msg.textContent = "Please wait a minute before sending another review."; return; }
-    const text = $("rtext").value.trim();
-    if(text.length < 10){ msg.textContent = "Please write at least 10 characters."; return; }
-    $("rbtn").disabled = true; msg.textContent = "Sending...";
+  const f=$("rform");if(!f)return;
+  f.addEventListener("submit",async e=>{
+    e.preventDefault();const msg=$("rmsg");
+    if($("rhp").value)return;
+    let last=0;try{last=+localStorage.getItem("fyd_last_review")||0}catch(x){}
+    if(Date.now()-last<60000){msg.textContent="Please wait a minute before sending another review.";return}
+    const text=$("rtext").value.trim();
+    if(text.length<10){msg.textContent="Please write at least 10 characters.";return}
+    $("rbtn").disabled=true;msg.textContent="Sending...";
     try{
-      const rv = {name: $("rname").value.trim().slice(0, 40), role: $("rrole").value.trim().slice(0, 60), rating: parseInt($("rrate").value, 10), text: text.slice(0, 600)};
-      await fetch(REVIEWS_URL, {method: "POST", mode: "no-cors", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify({...rv, hp: ""})});
-      reviews.unshift(rv);
-      $("rlist").innerHTML = `<div class="revs">${reviews.map(revCard).join("")}</div>`;
-      try{ localStorage.setItem("fyd_last_review", String(Date.now())); }catch(x){}
-      f.reset(); msg.textContent = "Thank you! Your review is now on the page.";
-    }catch(err){ msg.textContent = "Sorry, we could not send your review. Please try again later."; }
-    $("rbtn").disabled = false;
+      const rv={name:$("rname").value.trim().slice(0,40),role:$("rrole").value.trim().slice(0,60),rating:parseInt($("rrate").value,10),text:text.slice(0,600),hp:""};
+      await fetch(REVIEWS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(rv)});
+      try{localStorage.setItem("fyd_last_review",String(Date.now()))}catch(x){}
+      f.reset();msg.textContent="Thank you! Your review was sent. It will show here once it is published.";
+    }catch(err){msg.textContent="Your review could not be sent. Check your connection and try again."}
+    $("rbtn").disabled=false;
   });
 }
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const linkify = s => esc(s).replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)])|([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})/g, (m, u, e) => u ? `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>` : `<a href="mailto:${e}">${e}</a>`);
-const cats = {
-  internships:  {type:"internship",  name:"Internships",  icon:"💼", color:"#ff5a36", blurb:"Work experience placements, many with a stipend or travel support."},
-  jobs:         {type:"job",         name:"Jobs",         icon:"💻", color:"#c4271f", blurb:"Paid roles and career opportunities for students and graduates."},
-  fellowships:  {type:"fellowship",  name:"Fellowships",  icon:"🌍", color:"#0aa391", blurb:"Funded programs for research, leadership and social impact."},
-  conferences:  {type:"conference",  name:"Conferences",  icon:"🎤", color:"#1b6fd6", blurb:"Conferences, summits and events to learn, network and present. Many offer free passes or travel grants."},
-  scholarships: {type:"scholarship", name:"Scholarships", icon:"🎓", color:"#6a4cff", blurb:"Funding for your studies, from tuition to living costs."},
-  competitions: {type:"competition", name:"Competitions & Programs", icon:"🏆", color:"#d6336c", blurb:"Hackathons, contests, challenges and programs to build your skills and win prizes, grants and recognition."},
-  all:          {type:"",            name:"All opportunities", icon:"✨", color:"#17132b", blurb:"Every job, internship, fellowship, conference and scholarship in one list."}
-};
-const ALL_COUNTRIES = "Global|Afghanistan|Albania|Algeria|Andorra|Angola|Antigua and Barbuda|Argentina|Armenia|Australia|Austria|Azerbaijan|Bahamas|Bahrain|Bangladesh|Barbados|Belarus|Belgium|Belize|Benin|Bhutan|Bolivia|Bosnia and Herzegovina|Botswana|Brazil|Brunei|Bulgaria|Burkina Faso|Burundi|Cabo Verde|Cambodia|Cameroon|Canada|Central African Republic|Chad|Chile|China|Colombia|Comoros|Congo|Costa Rica|Côte d'Ivoire|Croatia|Cuba|Cyprus|Czech Republic|Democratic Republic of the Congo|Denmark|Djibouti|Dominica|Dominican Republic|Ecuador|Egypt|El Salvador|Equatorial Guinea|Eritrea|Estonia|Eswatini|Ethiopia|Fiji|Finland|France|Gabon|Gambia|Georgia|Germany|Ghana|Greece|Grenada|Guatemala|Guinea|Guinea-Bissau|Guyana|Haiti|Honduras|Hungary|Iceland|India|Indonesia|Iran|Iraq|Ireland|Israel|Italy|Jamaica|Japan|Jordan|Kazakhstan|Kenya|Kiribati|Kosovo|Kuwait|Kyrgyzstan|Laos|Latvia|Lebanon|Lesotho|Liberia|Libya|Liechtenstein|Lithuania|Luxembourg|Madagascar|Malawi|Malaysia|Maldives|Mali|Malta|Marshall Islands|Mauritania|Mauritius|Mexico|Micronesia|Moldova|Monaco|Mongolia|Montenegro|Morocco|Mozambique|Myanmar|Namibia|Nauru|Nepal|Netherlands|New Zealand|Nicaragua|Niger|Nigeria|North Korea|North Macedonia|Norway|Oman|Pakistan|Palau|Palestine|Panama|Papua New Guinea|Paraguay|Peru|Philippines|Poland|Portugal|Qatar|Romania|Russia|Rwanda|Saint Kitts and Nevis|Saint Lucia|Saint Vincent and the Grenadines|Samoa|San Marino|São Tomé and Príncipe|Saudi Arabia|Senegal|Serbia|Seychelles|Sierra Leone|Singapore|Slovakia|Slovenia|Solomon Islands|Somalia|South Africa|South Korea|South Sudan|Spain|Sri Lanka|Sudan|Suriname|Sweden|Switzerland|Syria|Taiwan|Tajikistan|Tanzania|Thailand|Timor-Leste|Togo|Tonga|Trinidad and Tobago|Tunisia|Turkey|Turkmenistan|Tuvalu|Uganda|Ukraine|United Arab Emirates|United Kingdom|United States|Uruguay|Uzbekistan|Vanuatu|Vatican City|Venezuela|Vietnam|Yemen|Zambia|Zimbabwe".split("|");
-const TYPE_FIX = {"competitions & programs":"competition","competitions and programs":"competition","competitions":"competition","hackathon":"competition","hackathons":"competition","program":"competition","programs":"competition","internships":"internship","jobs":"job","fellowships":"fellowship","conferences":"conference","scholarships":"scholarship"};
-const fixType = t => { const k = String(t || "").trim().toLowerCase(); return TYPE_FIX[k] || k; };
-const host = p => p.host || p.org || "Host not listed";
-const summary = p => p.summary || p.desc || p.details || p.overview || "";
-const link = p => { const u = p.link || p.applyLink || ""; return /^https?:\/\//i.test(u) ? u : ""; };
-const countOf = t => posts.filter(p => !t || p.type === t).length;
-const catKey = p => Object.keys(cats).find(k => cats[k].type === p.type) || "all";
-
-function parseDate(v){ if(!v) return null; const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v); const d = m ? new Date(+m[1], m[2]-1, +m[3]) : new Date(v); return isNaN(d) ? null : d; }
-function daysLeft(v){ const d = parseDate(v); if(!d) return null; const n = new Date(); n.setHours(0,0,0,0); return Math.round((d - n) / 86400000); }
-function fmt(v){ const d = parseDate(v); return d ? d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}) : (v || "Not listed"); }
-function chip(v){ const n = daysLeft(v); if(n === null) return ["Deadline not listed",""]; if(n < 0) return ["Closed","late"]; if(n === 0) return ["Last day to apply","soon"]; if(n === 1) return ["1 day left","soon"]; return [n + " days left", n <= 14 ? "soon" : ""]; }
-function steps(t){ let a = String(t || "").split(/\n+/).map(s => s.trim()).filter(Boolean); if(a.length < 2) a = String(t || "").split(/(?<=[.!?])\s+(?=[A-Z])/).map(s => s.trim()).filter(Boolean); return a; }
-
 function buildNav(slug){
-  const items = [["", "Home", "🏠", ""]].concat(Object.entries(cats).map(([k,c]) => [k, c.name, c.icon, loaded ? countOf(c.type) : ""]));
-  $("nav").innerHTML = items.map(([k,n,i,c]) => `<a href="#/${k}" class="${slug === k ? "on" : ""}"><i>${i}</i>${n}${c !== "" ? `<small>${c}</small>` : ""}</a>`).join("");
+  const items=[["","Home","🏠",""]].concat(Object.entries(cats).map(([k,c])=>[k,c.name,c.icon,loaded?countOf(c.type):""]));
+  $("nav").innerHTML=items.map(([k,n,i,c])=>`<a href="#/${k}" ${slug===k?'class="on" aria-current="page"':""}><i aria-hidden="true">${i}</i>${n}${c!==""?`<small>${c}</small>`:""}</a>`).join("");
 }
-
+function card(p){
+  const[t,cl]=chip(p.deadline);
+  return`<article class="card t-${tc(p.type)} ${cl==="late"?"closed":""}">
+<div class="row"><span class="badge">${esc(p.type||"other")}</span><span class="chip ${cl}">${t}</span></div>
+<h3><a href="#/post/${encodeURIComponent(p.id)}">${esc(p.title)}</a></h3>
+<div class="host">${esc(host(p))}${p.country?" - "+esc(p.country):""}</div>
+<div class="fund">${esc(p.funding||"Funding details inside")}</div>
+<div class="sum">${esc(summary(p))}</div>
+<div class="more">View full details &rarr;</div></article>`;
+}
 function home(){
-  const tiles = ["internships","jobs","fellowships","conferences","scholarships","competitions"].map(k => { const c = cats[k];
-    return `<a class="tile" style="--c:${c.color}" href="#/${k}"><i>${c.icon}</i><b>${c.name}</b><span>${loaded ? countOf(c.type) + " listed. " : ""}${c.blurb}</span></a>`; }).join("");
-  return `<section class="hero">
+  const tiles=["internships","jobs","fellowships","conferences","scholarships","competitions"].map(k=>{const c=cats[k];
+    return`<a class="tile" style="--c:${c.color}" href="#/${k}"><i aria-hidden="true">${c.icon}</i><b>${c.name}</b><span>${loaded?countOf(c.type)+" open. ":""}${c.blurb}</span></a>`}).join("");
+  const soon=posts.filter(p=>{const n=daysLeft(p.deadline);return n!==null&&n>=0&&n<=30}).sort((a,b)=>daysLeft(a.deadline)-daysLeft(b.deadline)).slice(0,3);
+  return`<section class="hero">
 <span class="kick">Our vision</span>
 <h1>Every student deserves to find the funding for their dream.</h1>
 <p>Fund Your Dreams brings scholarships, jobs, internships, fellowships, conferences and summits from around the world into one simple place, so talented students everywhere can discover the right opportunity and apply with confidence.</p>
 <div class="acts"><a class="btn w" href="#/all">Browse opportunities</a><a class="btn ghost" href="#/reviews/read">⭐ Student reviews</a><a class="btn ghost" href="#follow">Follow us</a></div>
 </section>
+${soon.length?`<h2 class="sec">Closing soon</h2><div class="list">${soon.map(card).join("")}</div>`:""}
 <h2 class="sec">What is Fund Your Dreams?</h2>
 <div class="about">
 <div class="box"><div class="n">1</div><h3>One place to look</h3><p>Funded opportunities are scattered across hundreds of websites. We gather them in one list.</p></div>
@@ -239,121 +263,104 @@ function home(){
 <div class="tiles">${tiles}</div>
 <h2 class="sec" id="follow">Follow us</h2>
 <div class="soc">
-<a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e1306c">IG</em><div><small>Instagram</small><b>@fundyoursdreams</b></div></a>
-<a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#e62117">YT</em><div><small>YouTube</small><b>@fundyourdreams</b></div></a>
+<a href="https://www.instagram.com/fundyoursdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#c2185b">IG</em><div><small>Instagram</small><b>@fundyoursdreams</b></div></a>
+<a href="https://youtube.com/@fundyourdreams" target="_blank" rel="noopener noreferrer"><em style="--c:#c4271f">YT</em><div><small>YouTube</small><b>@fundyourdreams</b></div></a>
 <a href="https://www.linkedin.com/in/fund-your-dreams-94470a405" target="_blank" rel="noopener noreferrer"><em style="--c:#0a66c2">in</em><div><small>LinkedIn</small><b>Fund Your Dreams</b></div></a>
-<a href="https://whatsapp.com/channel/0029Vb8wJff8fewkELjNUD11" target="_blank" rel="noopener noreferrer"><em style="--c:#25d366">WA</em><div><small>WhatsApp</small><b>Join our channel</b></div></a>
+<a href="https://whatsapp.com/channel/0029Vb8wJff8fewkELjNUD11" target="_blank" rel="noopener noreferrer"><em style="--c:#128c4a">WA</em><div><small>WhatsApp</small><b>Join our channel</b></div></a>
 </div>
 <h2 class="sec">What students say</h2>
-${reviews.length ? `<div class="revs">${reviews.slice(0, 3).map(revCard).join("")}</div>` : `<div class="box"><h3>Be one of our first reviewers</h3><p>Tried the site? Tell us what helped and what could be better.</p></div>`}
-<div class="acts2"><a class="btn or" href="#/reviews">✍️ Write a review</a>${reviews.length ? `<a class="btn alt" href="#/reviews/read">⭐ See all student reviews</a>` : ""}</div>
+${reviews.length?`<div class="revs">${reviews.slice(0,3).map(revCard).join("")}</div>`:`<div class="box"><h3>Be one of our first reviewers</h3><p>Tried the site? Tell us what helped and what could be better.</p></div>`}
+<div class="acts2"><a class="btn or" href="#/reviews">✍️ Write a review</a>${reviews.length?`<a class="btn alt" href="#/reviews/read">⭐ See all student reviews</a>`:""}</div>
 <div class="safe"><b>Stay safe:</b> never pay an application fee to an agent. Apply only through the official link.</div>`;
 }
-
 function listPage(slug){
-  const c = cats[slug];
-  const cs = [...new Set([...ALL_COUNTRIES, ...posts.map(p => p.country).filter(Boolean)])].sort();
-  return `<div class="ph" style="--c:${c.color}"><h1>${c.icon} ${c.name}</h1><p>${c.blurb}</p></div>
+  const c=cats[slug];
+  const cs=[...new Set(posts.flatMap(places))].filter(x=>x!=="Global").sort();
+  const opt=(v,l)=>`<option value="${esc(v)}"${filt.sort===v?" selected":""}>${l}</option>`;
+  return`<div class="ph" style="--c:${c.color}"><h1>${c.icon} ${c.name}</h1><p>${c.blurb}</p></div>
 <div class="tools">
-<input id="q" type="search" placeholder="Search by name, host or country" aria-label="Search">
-<select id="country" aria-label="Country"><option value="">All countries</option>${cs.map(x => `<option>${esc(x)}</option>`).join("")}</select>
-<select id="sort" aria-label="Sort"><option value="due">Closing soonest</option><option value="new">Newest added</option><option value="az">A to Z</option></select>
-</div><div class="count" id="count"></div><div class="list" id="list"></div>`;
+<input id="q" type="search" placeholder="Search by name, host or country" aria-label="Search" value="${esc(filt.q)}">
+<select id="country" aria-label="Country"><option value="">All countries</option>${cs.map(x=>`<option${filt.country===x?" selected":""}>${esc(x)}</option>`).join("")}</select>
+<select id="sort" aria-label="Sort">${opt("due","Closing soonest")}${opt("new","Newest added")}${opt("az","A to Z")}</select>
+</div><div class="meta"><span id="count" aria-live="polite"></span><label><input type="checkbox" id="closed"${filt.closed?" checked":""}> Show closed</label></div><div class="list" id="list"></div>`;
 }
-
 function fillList(slug){
-  const c = cats[slug], q = $("q").value.trim().toLowerCase(), co = $("country").value, s = $("sort").value;
-  let list = posts.filter(p => (!c.type || p.type === c.type) && (!co || p.country === co) && (!q || [p.title, host(p), p.country, summary(p), p.funding].join(" ").toLowerCase().includes(q)));
-  const rank = p => { const n = daysLeft(p.deadline); return n === null ? 1e9 : (n < 0 ? 1e8 - n : n); };
-  if(s === "due") list.sort((a,b) => rank(a) - rank(b));
-  else if(s === "az") list.sort((a,b) => (a.title || "").localeCompare(b.title || ""));
-  else list.sort((a,b) => (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0));
-  $("count").textContent = list.length === 1 ? "1 opportunity" : list.length + " opportunities";
-  $("list").innerHTML = list.length ? list.map(p => { const [t, cl] = chip(p.deadline);
-    return `<article class="card t-${esc(p.type)} ${cl === "late" ? "closed" : ""}">
-<div class="row"><span class="badge">${esc(p.type)}</span><span class="chip ${cl}">${t}</span></div>
-<h3><a href="#/post/${encodeURIComponent(p.id)}">${esc(p.title)}</a></h3>
-<div class="host">${esc(host(p))}${p.country ? " - " + esc(p.country) : ""}</div>
-<div class="fund">${esc(p.funding || "Funding details inside")}</div>
-<div class="sum">${esc(summary(p))}</div>
-<div class="more">View full details &rarr;</div></article>`; }).join("")
-  : `<div class="empty"><p><b>${posts.length ? "No matches found." : "No opportunities posted here yet."}</b></p><p>${posts.length ? "Try a different word or country." : "Check back soon."}</p></div>`;
+  const c=cats[slug];
+  filt.q=$("q").value.trim().toLowerCase();filt.country=$("country").value;filt.sort=$("sort").value;filt.closed=$("closed").checked;
+  const co=filt.country;
+  let list=posts.filter(p=>(!c.type||p.type===c.type)&&(filt.closed||isOpen(p))&&(!co||places(p).includes(co)||places(p).includes("Global"))&&(!filt.q||[p.title,host(p),places(p).join(" "),summary(p),p.funding].join(" ").toLowerCase().includes(filt.q)));
+  const rank=p=>{const n=daysLeft(p.deadline);return n===null?1e6:(n<0?1e8-n:n)};
+  if(filt.sort==="due")list.sort((a,b)=>rank(a)-rank(b));
+  else if(filt.sort==="az")list.sort((a,b)=>(a.title||"").localeCompare(b.title||""));
+  else list.sort((a,b)=>(Date.parse(b.createdAt)||0)-(Date.parse(a.createdAt)||0));
+  $("count").textContent=list.length===1?"1 opportunity":list.length+" opportunities";
+  $("list").innerHTML=list.length?list.map(card).join(""):`<div class="empty"><p><b>${posts.length?"No matches found.":"No opportunities posted here yet."}</b></p><p>${posts.length?"Try a different word or country, or show closed listings.":"Check back soon."}</p></div>`;
 }
-
 function detail(p){
-  const [t, cl] = chip(p.deadline), url = link(p), st = steps(p.steps);
-  const sec = (h, x) => x ? `<h2>${h}</h2><p>${linkify(x)}</p>` : "";
-  return `<article class="sheet t-${esc(p.type)}">
-<div class="row"><span class="badge">${esc(p.type)}</span><span class="chip ${cl}">${t}</span></div>
+  const[t,cl]=chip(p.deadline),url=link(p),st=steps(p.steps);
+  const sec=(h,x)=>x?`<h2>${h}</h2><p>${linkify(x)}</p>`:"";
+  return`<article class="sheet t-${tc(p.type)}">
+<div class="row"><span class="badge">${esc(p.type||"other")}</span><span class="chip ${cl}">${t}</span></div>
 <h1>${esc(p.title)}</h1><div class="host">${esc(host(p))}</div>
 <div class="facts">
-<div class="fact"><span>Funding</span><b>${esc(p.funding || "Not listed")}</b></div>
+<div class="fact"><span>Funding</span><b>${esc(p.funding||"Not listed")}</b></div>
 <div class="fact"><span>Deadline</span><b>${esc(fmt(p.deadline))}</b></div>
-<div class="fact"><span>Country</span><b>${esc(p.country || "Global")}</b></div>
-<div class="fact"><span>Level</span><b>${esc(p.level || "Any level")}</b></div>${p.eventDate ? `<div class="fact"><span>Event date</span><b>${esc(fmt(p.eventDate))}</b></div>` : ""}${p.location ? `<div class="fact"><span>Location</span><b>${esc(p.location)}</b></div>` : ""}</div>
-${sec("About this opportunity", p.overview || p.details || summary(p))}
-${sec("Who can apply", p.eligibility)}${sec("What you get", p.benefits)}${sec("Documents you need", p.documents)}
-${st.length ? `<h2>How to apply</h2><ol>${st.map(s => `<li>${linkify(s)}</li>`).join("")}</ol>` : ""}
-${sec("Good to know", p.notes)}
+<div class="fact"><span>Country</span><b>${esc(p.country||"Global")}</b></div>
+<div class="fact"><span>Level</span><b>${esc(p.level||"Any level")}</b></div>${p.eligibleCountries?`<div class="fact"><span>Open to</span><b>${esc([].concat(p.eligibleCountries).join(", "))}</b></div>`:""}${p.eventDate?`<div class="fact"><span>Event date</span><b>${esc(fmt(p.eventDate))}</b></div>`:""}${p.location?`<div class="fact"><span>Location</span><b>${esc(p.location)}</b></div>`:""}${p.verifiedAt?`<div class="fact"><span>Last verified</span><b>${esc(fmt(p.verifiedAt))}</b></div>`:""}</div>
+${sec("About this opportunity",p.overview||p.details||summary(p))}
+${sec("Who can apply",p.eligibility)}${sec("What you get",p.benefits)}${sec("Documents you need",p.documents)}
+${st.length?`<h2>How to apply</h2><ol>${st.map(s=>`<li>${linkify(s)}</li>`).join("")}</ol>`:""}
+${sec("Good to know",p.notes)}
 <div class="safe">Confirm the deadline and requirements on the official page. Never pay to apply.</div>
-<div class="actions">${url ? `<a class="btn or" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Apply on official site</a>` : ""}<button class="btn alt" id="shareBtn">Share</button></div></article>`;
+<div class="actions">${url?`<a class="btn or" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Apply on official site</a>`:""}<button class="btn alt" id="shareBtn">Share</button></div></article>`;
 }
+const dataProblem=()=>`<div class="empty"><p><b>We could not load the opportunities.</b></p><p>Check your internet connection and try again.</p><p style="margin-top:.8rem"><button class="btn" onclick="location.reload()">Try again</button></p></div>`;
+function closeMenu(){$("side").classList.remove("open");$("veil").classList.remove("show");$("menu").setAttribute("aria-expanded","false")}
+$("menu").onclick=()=>{const o=$("side").classList.toggle("open");$("veil").classList.toggle("show",o);$("menu").setAttribute("aria-expanded",o)};
+$("veil").onclick=closeMenu;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
 
-function dataProblem(){
-  return `<div class="empty"><p><b>The opportunity list could not be loaded.</b></p><p>If you opened this file by double-clicking it, open it through GitHub Pages or a local server instead, and make sure <code>data/posts.json</code> exists.</p><p style="margin-top:.8rem"><button class="btn" onclick="location.reload()">Try again</button></p></div>`;
-}
-function closeMenu(){ $("side").classList.remove("open"); $("veil").classList.remove("show"); $("menu").setAttribute("aria-expanded","false"); }
-$("menu").onclick = () => { const o = $("side").classList.toggle("open"); $("veil").classList.toggle("show", o); $("menu").setAttribute("aria-expanded", o); };
-$("veil").onclick = closeMenu;
-document.addEventListener("keydown", e => { if(e.key === "Escape") closeMenu(); });
-
-function route(){
+function render(){
   closeMenu();
-  const h = location.hash.replace(/^#\/?/, ""), v = $("view");
-  document.title = "Fund Your Dreams | Scholarships, Jobs, Internships, Fellowships and Conferences";
-  if(h === "follow"){ v.innerHTML = home(); buildNav(""); $("follow").scrollIntoView(); return; }
-  const pm = h.match(/^post\/(.+)$/);
+  const h=location.hash.replace(/^#\/?/,""),v=$("view");
+  document.title="Fund Your Dreams | Scholarships, Jobs, Internships, Fellowships and Conferences";
+  if(h==="follow"){v.innerHTML=home();buildNav("");$("follow").scrollIntoView();return}
+  const pm=h.match(/^post\/(.+)$/);
   if(pm){
     buildNav("");
-    if(failed){ v.innerHTML = `<a class="btn alt back" href="#/">Back to home</a>` + dataProblem(); return; }
-    if(!loaded){ v.innerHTML = '<div class="empty">Loading...</div>'; return; }
-    const p = posts.find(x => x.id === decodeURIComponent(pm[1]));
-    const back = `<a class="btn alt back" href="#/${lastList}">&larr; Back to ${cats[lastList].name.toLowerCase()}</a>`;
-    if(!p){ v.innerHTML = back + '<div class="empty">This opportunity could not be found. It may have been removed.</div>'; return; }
-    v.innerHTML = back + detail(p); document.title = p.title + " | Fund Your Dreams"; buildNav(catKey(p));
-    $("shareBtn").onclick = async () => { try{ navigator.share ? await navigator.share({title: p.title, url: location.href}) : (await navigator.clipboard.writeText(location.href), $("shareBtn").textContent = "Link copied"); }catch(e){} };
-    window.scrollTo(0,0); return;
+    if(failed){v.innerHTML=`<a class="btn alt back" href="#/">Back to home</a>`+dataProblem();return}
+    if(!loaded){v.innerHTML='<div class="empty">Loading...</div>';return}
+    let id;try{id=decodeURIComponent(pm[1])}catch(e){id=pm[1]}
+    const p=posts.find(x=>x.id===id);
+    const back=`<a class="btn alt back" href="#/${lastList}">&larr; Back to ${cats[lastList].name.toLowerCase()}</a>`;
+    if(!p){v.innerHTML=back+'<div class="empty">This opportunity could not be found. It may have been removed.</div>';return}
+    v.innerHTML=back+detail(p);document.title=p.title+" | Fund Your Dreams";buildNav(catKey(p));
+    $("shareBtn").onclick=async()=>{try{navigator.share?await navigator.share({title:p.title,url:location.href}):(await navigator.clipboard.writeText(location.href),$("shareBtn").textContent="Link copied")}catch(e){}};
+    window.scrollTo(0,0);return;
   }
-  if(h === "reviews" || h === "reviews/read"){
-    buildNav(""); v.innerHTML = reviewsPage(); wireReviewForm();
-    if(h === "reviews/read") $("rlist").scrollIntoView(); else window.scrollTo(0,0);
+  if(h==="reviews"||h==="reviews/read"){
+    buildNav("");v.innerHTML=reviewsPage();wireReviewForm();
+    if(h==="reviews/read")$("rlist").scrollIntoView();else window.scrollTo(0,0);
     return;
   }
   if(cats[h]){
-    lastList = h; buildNav(h);
-    if(failed){ v.innerHTML = dataProblem(); return; }
-    if(!loaded){ v.innerHTML = '<div class="empty">Loading...</div>'; return; }
-    v.innerHTML = listPage(h); fillList(h);
-    ["q","country","sort"].forEach(id => $(id).addEventListener("input", () => fillList(h)));
-    window.scrollTo(0,0); return;
+    lastList=h;buildNav(h);
+    if(failed){v.innerHTML=dataProblem();return}
+    if(!loaded){v.innerHTML='<div class="empty">Loading...</div>';return}
+    v.innerHTML=listPage(h);fillList(h);
+    ["q","country","sort","closed"].forEach(id=>$(id).addEventListener("input",()=>fillList(h)));
+    window.scrollTo(0,0);return;
   }
-  v.innerHTML = home(); buildNav(""); window.scrollTo(0,0);
+  v.innerHTML=home();buildNav("");window.scrollTo(0,0);
 }
-window.addEventListener("hashchange", route);
+window.addEventListener("hashchange",()=>{render();$("view").focus({preventScroll:true})});
 
 async function init(){
-  route();
-  try{
-    const r = await fetch("data/posts.json", {cache:"no-store"});
-    if(!r.ok) throw new Error("load failed");
-    const data = await r.json();
-    posts = (Array.isArray(data) ? data : []).filter(p => !p.status || p.status === "published").map((p,i) => ({...p, id: String(p.id ?? "p" + i), type: fixType(p.type)}));
-    loaded = true;
-  }catch(e){ failed = true; }
-  await loadReviews();
-  const h = location.hash.replace(/^#\/?/, "");
-  if(h === "" || h === "follow") buildNav(""); else route();
-  if(h === "") route();
+  render();
+  await Promise.all([loadPosts(),loadReviews()]);
+  const h=location.hash.replace(/^#\/?/,"");
+  if(h==="reviews"||h==="reviews/read"){buildNav("");const l=$("rlist");if(l)l.innerHTML=revList()}
+  else render();
 }
 init();
 </script>
